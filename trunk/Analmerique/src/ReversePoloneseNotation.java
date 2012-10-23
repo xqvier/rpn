@@ -21,6 +21,7 @@ public class ReversePoloneseNotation {
 		poubelle = new Stack<Element>();
 
 	}
+	//Commentaire
 
 	public Queue<Element> traitement() {
 		Element currentToken;
