@@ -4,6 +4,11 @@ import java.io.ObjectInputStream.GetField;
 
 public class Operateur extends Element {
 	
+	@Override
+	public String toString() {
+		return "Operateur [valeur=" + valeur + "]";
+	}
+
 	private String valeur;
 	
 	/**
