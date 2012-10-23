@@ -45,6 +45,10 @@ public class Calcul {
 					op1 = (Operande) processStack.pop();
 					processStack.push(new Operande(op1.getValeur()
 							/ op2.getValeur()));
+				}else if (((Operateur) currentElement).getValeur().equals("^")) {
+					op2 = (Operande) processStack.pop();
+					op1 = (Operande) processStack.pop();
+					processStack.push(new Operande(Math.pow(op1.getValeur(), op2.getValeur())));
 				}
 			}
 		}
