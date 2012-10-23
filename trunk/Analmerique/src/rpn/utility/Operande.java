@@ -2,6 +2,12 @@ package rpn.utility;
 
 public class Operande extends Element {
 	
+	@Override
+	public String toString() {
+		return "Operande [valeur=" + valeur + "]";
+	}
+
+
 	private Double valeur;
 	
 	/**

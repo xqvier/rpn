@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 public class Decoupe {
 
 	public static Queue<Element> decoupe(String pEquation) {
+		String temp = "suce";
 		String equation = pEquation;
 		LinkedList<Element> equationTraitee = new LinkedList<Element>();
 		Pattern pattern = Pattern.compile("[0-9]+|[-+*/]|[()]");
@@ -19,11 +20,16 @@ public class Decoupe {
 		 * l'algorithme de transformation en notation polonaise inversée
 		 */
 		while (matcher.find())
-			System.out.println("" + matcher.group(0));
-		if (Decoupe.isNumber(matcher.group(0))) {
-			equationTraitee.add(new Operande(Double.valueOf(matcher.group(0))));
-		} else {
-			equationTraitee.add(new Operateur(matcher.group(0)));
+		{
+			temp = matcher.group(0);
+			//System.out.println(temp);
+			// TODO yea yea, go tester les nombre negatif ( a partir de la fin si - rencontré suivit d'un - c'est que 
+			// c'est un nombre negatif
+			if (Decoupe.isNumber(temp)) {
+				equationTraitee.add(new Operande(Double.valueOf(temp)));
+			} else {
+				equationTraitee.add(new Operateur(temp));
+			}
 		}
 		return equationTraitee;
 	}
