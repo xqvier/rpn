@@ -35,28 +35,45 @@ public class ReversePoloneseNotation {
 				if (((Operateur) currentToken).getValeur().equals("(")) {
 					pileOperateur.add(currentToken);
 				} else if (((Operateur) currentToken).getValeur().equals(")")) {
+					poubelle.add(currentToken);
 					currentOperator = pileOperateur.pop();
 					while (!((Operateur) currentOperator).getValeur().equals(
 							"(")) {
 						fileSortie.add(currentOperator);
 						currentOperator = pileOperateur.pop();
 					}
-					poubelle.add(pileOperateur.pop());
+					poubelle.add(currentOperator);
 				} else {
 
 					if (pileOperateur.isEmpty()
 							|| (((Operateur) currentToken).getValeur().equals(
-									"*") && (((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("+") || ((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("-")))
+									"*")
+									&& (((Operateur) pileOperateur
+											.lastElement()).getValeur().equals(
+											"+") || ((Operateur) pileOperateur
+											.lastElement()).getValeur().equals(
+											"-")) || ((Operateur) pileOperateur
+									.lastElement()).getValeur().equals("("))
+							|| (((Operateur) currentToken).getValeur()
+									.equals("^"))
 							|| (((Operateur) currentToken).getValeur().equals(
-									"/") && (((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("+") || ((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("-")))
+									"/")
+									&& (((Operateur) pileOperateur
+											.lastElement()).getValeur().equals(
+											"+") || ((Operateur) pileOperateur
+											.lastElement()).getValeur().equals(
+											"-")) || ((Operateur) pileOperateur
+									.lastElement()).getValeur().equals("("))
 							|| (((Operateur) currentToken).getValeur().equals(
 									"(") && (((Operateur) pileOperateur
 									.lastElement()).getValeur().equals("+") || ((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("-")))) {
+									.lastElement()).getValeur().equals("-")))
+							|| (((Operateur) currentToken).getValeur().equals(
+									"+") && (((Operateur) pileOperateur
+									.lastElement()).getValeur().equals("(")))
+							|| (((Operateur) currentToken).getValeur().equals(
+									"-") && (((Operateur) pileOperateur
+									.lastElement()).getValeur().equals("(")))) {
 						pileOperateur.add(currentToken);
 					} else {
 						fileSortie.add(pileOperateur.pop());
@@ -66,6 +83,10 @@ public class ReversePoloneseNotation {
 
 			}
 		}
+		while (! pileOperateur.isEmpty()){
+			fileSortie.add(pileOperateur.pop());
+		}
+		
 		return fileSortie;
 	}
 }

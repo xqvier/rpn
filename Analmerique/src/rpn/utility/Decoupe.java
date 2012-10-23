@@ -11,7 +11,7 @@ public class Decoupe {
 		String temp = "suce";
 		String equation = pEquation;
 		LinkedList<Element> equationTraitee = new LinkedList<Element>();
-		Pattern pattern = Pattern.compile("[0-9]+|[-+*/]|[()]");
+		Pattern pattern = Pattern.compile("[0-9]+|[-+*/]|[\\^()]");
 		Matcher matcher = pattern.matcher(equation);
 		/*
 		 * Tant que l'on trouve des "morceaux" de notre équation, on instancie

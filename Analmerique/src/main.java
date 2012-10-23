@@ -5,7 +5,7 @@ class FirstApp {
 
 		Queue<rpn.utility.Element> list;
 		ReversePoloneseNotation revPoNo;
-		String grosseVerge = "56*((6+2)/(8-7)*2-3)";
+		String grosseVerge = "56*((6+2)/(8-7)*2^3)";
 		Calcul calc;
 		list = rpn.utility.Decoupe.decoupe(grosseVerge);
 		System.out.println(list);
