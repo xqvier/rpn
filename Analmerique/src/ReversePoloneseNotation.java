@@ -31,20 +31,20 @@ public class ReversePoloneseNotation {
 			if (currentToken instanceof Operande) {
 				fileSortie.add(currentToken);
 			} else if (currentToken instanceof Operateur) {
-				if (currentToken.equals("(")) {
+				if (((Operateur)currentToken).getValeur().equals("(")) {
 					pileOperateur.add(currentToken);
-				} else if (currentToken.equals(")")) {
+				} else if (((Operateur)currentToken).getValeur().equals(")")) {
 					currentOperator = pileOperateur.pop();
-					while (!currentOperator.equals("(")) {
+					while (!((Operateur)currentOperator).getValeur().equals("(")) {
 						fileSortie.add(currentOperator);
 						currentOperator = pileOperateur.pop();
 					}
 					poubelle.add(pileOperateur.pop());
 				} else {
 					if (pileOperateur.isEmpty()
-							|| pileOperateur.lastElement().equals("(")
-							|| pileOperateur.lastElement().equals("*")
-							|| pileOperateur.lastElement().equals("/")) {
+							|| ((Operateur)pileOperateur.lastElement()).getValeur().equals("(")
+							|| ((Operateur)pileOperateur.lastElement()).getValeur().equals("*")
+							|| ((Operateur)pileOperateur.lastElement()).getValeur().equals("/")) {
 						pileOperateur.add(currentToken);
 					} else {
 						fileSortie.add(pileOperateur.pop());
