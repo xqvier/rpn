@@ -21,7 +21,8 @@ public class ReversePoloneseNotation {
 		poubelle = new Stack<Element>();
 
 	}
-	//Commentaire
+
+	// Commentaire
 
 	public Queue<Element> traitement() {
 		Element currentToken;
@@ -31,20 +32,31 @@ public class ReversePoloneseNotation {
 			if (currentToken instanceof Operande) {
 				fileSortie.add(currentToken);
 			} else if (currentToken instanceof Operateur) {
-				if (((Operateur)currentToken).getValeur().equals("(")) {
+				if (((Operateur) currentToken).getValeur().equals("(")) {
 					pileOperateur.add(currentToken);
-				} else if (((Operateur)currentToken).getValeur().equals(")")) {
+				} else if (((Operateur) currentToken).getValeur().equals(")")) {
 					currentOperator = pileOperateur.pop();
-					while (!((Operateur)currentOperator).getValeur().equals("(")) {
+					while (!((Operateur) currentOperator).getValeur().equals(
+							"(")) {
 						fileSortie.add(currentOperator);
 						currentOperator = pileOperateur.pop();
 					}
 					poubelle.add(pileOperateur.pop());
 				} else {
+
 					if (pileOperateur.isEmpty()
-							|| ((Operateur)pileOperateur.lastElement()).getValeur().equals("(")
-							|| ((Operateur)pileOperateur.lastElement()).getValeur().equals("*")
-							|| ((Operateur)pileOperateur.lastElement()).getValeur().equals("/")) {
+							|| (((Operateur) currentToken).getValeur().equals(
+									"*") && (((Operateur) pileOperateur
+									.lastElement()).getValeur().equals("+") || ((Operateur) pileOperateur
+									.lastElement()).getValeur().equals("-")))
+							|| (((Operateur) currentToken).getValeur().equals(
+									"/") && (((Operateur) pileOperateur
+									.lastElement()).getValeur().equals("+") || ((Operateur) pileOperateur
+									.lastElement()).getValeur().equals("-")))
+							|| (((Operateur) currentToken).getValeur().equals(
+									"(") && (((Operateur) pileOperateur
+									.lastElement()).getValeur().equals("+") || ((Operateur) pileOperateur
+									.lastElement()).getValeur().equals("-")))) {
 						pileOperateur.add(currentToken);
 					} else {
 						fileSortie.add(pileOperateur.pop());
