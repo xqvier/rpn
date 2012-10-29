@@ -1,33 +1,46 @@
+package rpn.process;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-import rpn.utility.Element;
-import rpn.utility.Operande;
-import rpn.utility.Operateur;
 
 public class ReversePoloneseNotation {
 
-	private Queue<Element> fileEntree;
-	private Queue<Element> fileSortie;
-	private Stack<Element> pileOperateur;
-	private Stack<Element> poubelle;
+	private static Queue<Element> fileEntree = new LinkedList<Element>();
+	private static Queue<Element> fileSortie = new LinkedList<Element>();
+	private static MyStack<Element> pileOperateur = new MyStack<Element>();
+	private static MyStack<Element> poubelle = new MyStack<Element>();
 
-	public ReversePoloneseNotation(Queue<Element> pFileEntree) {
-
-		fileEntree = pFileEntree;
-		fileSortie = new LinkedList<Element>();
-		pileOperateur = new Stack<Element>();
-		poubelle = new Stack<Element>();
-
-	}
 
 	// Commentaire
 
-	public Queue<Element> traitement() {
+	public static Queue<Element> getFileEntree() {
+		return fileEntree;
+	}
+
+
+	public static Queue<Element> getFileSortie() {
+		return fileSortie;
+	}
+
+
+	public static MyStack<Element> getPileOperateur() {
+		return pileOperateur;
+	}
+
+
+	public static MyStack<Element> getPoubelle() {
+		return poubelle;
+	}
+
+
+	public static Queue<Element> traitement(Queue<Element> pFileEntree) throws InterruptedException {
+		fileEntree = pFileEntree;
+		
 		Element currentToken;
 		Element currentOperator;
 		while (!fileEntree.isEmpty()) {
+			Thread.sleep(Params.WAIT_TIME);
 			currentToken = fileEntree.poll();
 			if (currentToken instanceof Operande) {
 				fileSortie.add(currentToken);

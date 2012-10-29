@@ -1,4 +1,4 @@
-package rpn.utility;
+package rpn.process;
 
 public class Operande extends Element {
 	
