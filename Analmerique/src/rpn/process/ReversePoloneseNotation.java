@@ -1,25 +1,22 @@
 package rpn.process;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
 
 
 public class ReversePoloneseNotation {
 
-	private static Queue<Element> fileEntree = new LinkedList<Element>();
-	private static Queue<Element> fileSortie = new LinkedList<Element>();
+	private static MyQueue<Element> fileEntree = new MyQueue<Element>();
+	private static MyQueue<Element> fileSortie = new MyQueue<Element>();
 	private static MyStack<Element> pileOperateur = new MyStack<Element>();
 	private static MyStack<Element> poubelle = new MyStack<Element>();
 
 
 	// Commentaire
 
-	public static Queue<Element> getFileEntree() {
+	public static MyQueue<Element> getFileEntree() {
 		return fileEntree;
 	}
 
 
-	public static Queue<Element> getFileSortie() {
+	public static MyQueue<Element> getFileSortie() {
 		return fileSortie;
 	}
 
@@ -34,7 +31,7 @@ public class ReversePoloneseNotation {
 	}
 
 
-	public static Queue<Element> traitement(Queue<Element> pFileEntree) throws InterruptedException {
+	public static MyQueue<Element> traitement(MyQueue<Element> pFileEntree) throws InterruptedException {
 		fileEntree = pFileEntree;
 		
 		Element currentToken;

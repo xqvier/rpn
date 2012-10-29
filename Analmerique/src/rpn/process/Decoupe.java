@@ -1,16 +1,14 @@
 package rpn.process;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Decoupe {
 
-	public static Queue<Element> decoupe(String pEquation) {
+	public static void decoupe(String pEquation) {
 		String temp = "suce";
 		String equation = pEquation;
-		LinkedList<Element> equationTraitee = new LinkedList<Element>();
+		MyQueue<Element> equationTraitee = ReversePoloneseNotation.getFileSortie();
 		Pattern pattern = Pattern.compile("[0-9]+|[-+*/]|[\\^()]");
 		Matcher matcher = pattern.matcher(equation);
 		/*
@@ -31,7 +29,6 @@ public class Decoupe {
 				equationTraitee.add(new Operateur(temp));
 			}
 		}
-		return equationTraitee;
 	}
 
 	/**
