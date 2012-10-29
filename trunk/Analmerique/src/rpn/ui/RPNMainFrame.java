@@ -19,11 +19,17 @@ public class RPNMainFrame extends JFrame{
 		mainPanel.setLayout(new BorderLayout());
 		JPanel processPilePanel = new PilePanel(ReversePoloneseNotation.getPileOperateur(), "PROCESS");
 		JPanel poubellePilePanel = new PilePanel(ReversePoloneseNotation.getPoubelle(), "POUBELLE");
+		JPanel fileSortiePanel = new FilePanel(ReversePoloneseNotation.getFileSortie(), "SORTIE");
+		JPanel fileEntreePanel = new FilePanel(ReversePoloneseNotation.getFileEntree(), "ENTREE");
 		processPilePanel.setVisible(true);
 		poubellePilePanel.setVisible(true);
+		fileEntreePanel.setVisible(true);
+		fileSortiePanel.setVisible(true);
 		
 		mainPanel.add(processPilePanel,BorderLayout.WEST);
 		mainPanel.add(poubellePilePanel, BorderLayout.EAST);
+		mainPanel.add(fileEntreePanel, BorderLayout.NORTH);
+		mainPanel.add(fileSortiePanel, BorderLayout.SOUTH);
 		
 		mainPanel.setVisible(true);
 		this.add(mainPanel);

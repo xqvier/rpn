@@ -1,17 +1,18 @@
 package rpn.main;
 
-import java.util.Queue;
-
 import rpn.process.Calcul;
+import rpn.process.Decoupe;
+import rpn.process.Element;
+import rpn.process.MyQueue;
 import rpn.process.ReversePoloneseNotation;
 
 public class MainProcess extends Thread {
 
 	@Override
 	public void run() {
-		Queue<rpn.process.Element> list;
+		MyQueue<Element> list = ReversePoloneseNotation.getFileSortie();
 		String grosseVerge = "56*((6+2)/(8-7)*2^3)";
-		list = rpn.process.Decoupe.decoupe(grosseVerge);
+		Decoupe.decoupe(grosseVerge);
 		System.out.println(list);
 		try {
 			list = ReversePoloneseNotation.traitement(list);
