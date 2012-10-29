@@ -1,4 +1,4 @@
-package rpn.utility;
+package rpn.process;
 
 import java.util.LinkedList;
 import java.util.Queue;

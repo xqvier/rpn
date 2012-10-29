@@ -1,6 +1,5 @@
-package rpn.utility;
+package rpn.process;
 
-import java.io.ObjectInputStream.GetField;
 
 public class Operateur extends Element {
 	
