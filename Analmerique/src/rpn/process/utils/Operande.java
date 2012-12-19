@@ -1,4 +1,4 @@
-package rpn.process;
+package rpn.process.utils;
 
 public class Operande extends Element {
 	
@@ -26,4 +26,5 @@ public class Operande extends Element {
 	public Double getValeur() {
 		return valeur;
 	}
+
 }

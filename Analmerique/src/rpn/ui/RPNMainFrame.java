@@ -2,40 +2,78 @@ package rpn.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import rpn.process.ReversePoloneseNotation;
+import rpn.process.utils.Element;
+import rpn.process.utils.MyQueue;
+import rpn.process.utils.MyStack;
+import rpn.ui.panel.CommandPanel;
+import rpn.ui.panel.FilePanel;
+import rpn.ui.panel.PilePanel;
 
 public class RPNMainFrame extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-	
-	public RPNMainFrame() {
+
+
+	public RPNMainFrame(int width, int height) {
+		this.setSize(new Dimension(width, height));
+
+		MyQueue<Element> fileEntree = new MyQueue<Element>();
+		MyQueue<Element> fileSortie = new MyQueue<Element>();
+		MyStack<Element> pileProcess = new MyStack<Element>();
+		MyStack<Element> pilePoubelle = new MyStack<Element>();
+		
+		
 		JPanel mainPanel = new JPanel();
 		mainPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+		
+						
 		mainPanel.setLayout(new BorderLayout());
-		JPanel processPilePanel = new PilePanel(ReversePoloneseNotation.getPileOperateur(), "PROCESS");
-		JPanel poubellePilePanel = new PilePanel(ReversePoloneseNotation.getPoubelle(), "POUBELLE");
-		JPanel fileSortiePanel = new FilePanel(ReversePoloneseNotation.getFileSortie(), "SORTIE");
-		JPanel fileEntreePanel = new FilePanel(ReversePoloneseNotation.getFileEntree(), "ENTREE");
+		JPanel processPilePanel = new PilePanel("PROCESS", pileProcess);
+		JPanel poubellePilePanel = new PilePanel("POUBELLE", pilePoubelle);
+		JPanel fileSortiePanel = new FilePanel("SORTIE", fileSortie);
+		JPanel fileEntreePanel = new FilePanel("ENTREE", fileEntree);
+		
+		JPanel filesPanel = new JPanel();
+		filesPanel.setPreferredSize(new Dimension(600, 100));
+		mainPanel.add(filesPanel, BorderLayout.SOUTH);
+		processPilePanel.setPreferredSize(new Dimension(50,500));
+		poubellePilePanel.setPreferredSize(new Dimension(50,500));
+		
+		
+		
+		filesPanel.setLayout(new GridLayout(2, 1));
+		filesPanel.add(fileEntreePanel);
+		filesPanel.add(fileSortiePanel);
+	
+		
+		mainPanel.add(processPilePanel, BorderLayout.WEST);
+		mainPanel.add(poubellePilePanel, BorderLayout.EAST);
+		mainPanel.add(filesPanel, BorderLayout.SOUTH);
+		
+		JPanel commandPannel = new CommandPanel(fileEntree, fileSortie, pileProcess, pilePoubelle);
+		
+		mainPanel.add(commandPannel, BorderLayout.CENTER);
+		
+		
+		mainPanel.setVisible(true);
+		
 		processPilePanel.setVisible(true);
 		poubellePilePanel.setVisible(true);
 		fileEntreePanel.setVisible(true);
 		fileSortiePanel.setVisible(true);
+
+	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		mainPanel.add(processPilePanel,BorderLayout.WEST);
-		mainPanel.add(poubellePilePanel, BorderLayout.EAST);
-		mainPanel.add(fileEntreePanel, BorderLayout.NORTH);
-		mainPanel.add(fileSortiePanel, BorderLayout.SOUTH);
-		
-		mainPanel.setVisible(true);
-		this.add(mainPanel);
-		
-		
+		this.setContentPane(mainPanel);
 		
 	}
+
 
 }

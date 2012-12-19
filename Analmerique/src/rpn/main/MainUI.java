@@ -9,9 +9,9 @@ public class MainUI extends Thread {
 
 	@Override
 	public void run() {
-		JFrame main = new RPNMainFrame();
-		main.setSize(800, 600);
+		JFrame main = new RPNMainFrame(800, 600);
 		main.setVisible(true);
 	}
+
 
 }

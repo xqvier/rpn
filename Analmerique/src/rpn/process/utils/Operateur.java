@@ -1,4 +1,4 @@
-package rpn.process;
+package rpn.process.utils;
 
 
 public class Operateur extends Element {
@@ -25,5 +25,6 @@ public class Operateur extends Element {
 	public String getValeur() {
 		return valeur;
 	}
+
 	
 }
