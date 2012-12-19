@@ -1,20 +1,29 @@
 package rpn.process;
-import java.util.Queue;
-import java.util.Stack;
+
+import rpn.process.utils.Element;
+import rpn.process.utils.MyQueue;
+import rpn.process.utils.MyStack;
+import rpn.process.utils.Operande;
+import rpn.process.utils.Operateur;
 
 
 public class Calcul {
 
-	private static Queue<Element> file = ReversePoloneseNotation.getFileSortie();
+	private MyStack<Element> processStack;
+	
+	private MyQueue<Element> fileSortie;
 
-	private static Stack<Element> processStack = ReversePoloneseNotation.getPileOperateur();
+	public Calcul(MyStack<Element> pPileProcess, MyQueue<Element> pFileSortie) {
+		processStack = pPileProcess;
+		fileSortie = pFileSortie;
+	}
+	
 
-
-	public static double process() {
+	public double run() {
 
 		Element currentElement;
-		while (!file.isEmpty()) {
-			currentElement = file.poll();
+		while (!fileSortie.isEmpty()) {
+			currentElement = fileSortie.poll();
 			if (currentElement instanceof Operande) {
 				processStack.push(currentElement);
 			} else if (currentElement instanceof Operateur) {

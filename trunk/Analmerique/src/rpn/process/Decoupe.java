@@ -3,12 +3,25 @@ package rpn.process;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Decoupe {
+import rpn.main.Params;
+import rpn.process.utils.Element;
+import rpn.process.utils.MyQueue;
+import rpn.process.utils.Operande;
+import rpn.process.utils.Operateur;
 
-	public static void decoupe(String pEquation) {
-		String temp = "suce";
+public class Decoupe {
+	
+
+	MyQueue<Element> equationTraitee;
+	
+	public Decoupe(MyQueue<Element> fileEntree){
+		equationTraitee = fileEntree;
+	}
+
+	public void run(String pEquation) throws InterruptedException {
+		String temp;
 		String equation = pEquation;
-		MyQueue<Element> equationTraitee = ReversePoloneseNotation.getFileSortie();
+		equationTraitee.clear();
 		Pattern pattern = Pattern.compile("[0-9]+|[-+*/]|[\\^()]");
 		Matcher matcher = pattern.matcher(equation);
 		/*
@@ -28,7 +41,10 @@ public class Decoupe {
 			} else {
 				equationTraitee.add(new Operateur(temp));
 			}
+			
+			Thread.sleep(Params.WAIT_TIME);
 		}
+		
 	}
 
 	/**

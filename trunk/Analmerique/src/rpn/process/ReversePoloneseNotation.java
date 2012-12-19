@@ -1,38 +1,43 @@
 package rpn.process;
 
+import rpn.main.Params;
+import rpn.process.utils.Element;
+import rpn.process.utils.MyQueue;
+import rpn.process.utils.MyStack;
+import rpn.process.utils.Operande;
+import rpn.process.utils.Operateur;
+
+
 
 public class ReversePoloneseNotation {
 
-	private static MyQueue<Element> fileEntree = new MyQueue<Element>();
-	private static MyQueue<Element> fileSortie = new MyQueue<Element>();
-	private static MyStack<Element> pileOperateur = new MyStack<Element>();
-	private static MyStack<Element> poubelle = new MyStack<Element>();
+	private  MyQueue<Element> fileEntree;
+	private  MyQueue<Element> fileSortie;
+	private  MyStack<Element> pileOperateur;
+	private  MyStack<Element> poubelle;
 
 
-	// Commentaire
-
-	public static MyQueue<Element> getFileEntree() {
-		return fileEntree;
+	
+	
+public ReversePoloneseNotation(MyQueue<Element> fileEntree,
+			MyQueue<Element> fileSortie, MyStack<Element> pileOperateur,
+			MyStack<Element> poubelle) {
+		this.fileEntree = fileEntree;
+		this.fileSortie = fileSortie;
+		this.pileOperateur = pileOperateur;
+		this.poubelle = poubelle;
 	}
 
 
-	public static MyQueue<Element> getFileSortie() {
-		return fileSortie;
-	}
 
 
-	public static MyStack<Element> getPileOperateur() {
-		return pileOperateur;
-	}
 
-
-	public static MyStack<Element> getPoubelle() {
-		return poubelle;
-	}
-
-
-	public static MyQueue<Element> traitement(MyQueue<Element> pFileEntree) throws InterruptedException {
-		fileEntree = pFileEntree;
+	public void run() throws InterruptedException {
+		
+		fileSortie.clear();
+		pileOperateur.clear();
+		poubelle.clear();
+		
 		
 		Element currentToken;
 		Element currentOperator;
@@ -58,32 +63,31 @@ public class ReversePoloneseNotation {
 					if (pileOperateur.isEmpty()
 							|| (((Operateur) currentToken).getValeur().equals(
 									"*")
-									&& (((Operateur) pileOperateur
-											.lastElement()).getValeur().equals(
+									&& (((Operateur) pileOperateur.getLast()).getValeur().equals(
 											"+") || ((Operateur) pileOperateur
-											.lastElement()).getValeur().equals(
+											.getLast()).getValeur().equals(
 											"-")) || ((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("("))
+									.getLast()).getValeur().equals("("))
 							|| (((Operateur) currentToken).getValeur()
 									.equals("^"))
 							|| (((Operateur) currentToken).getValeur().equals(
 									"/")
 									&& (((Operateur) pileOperateur
-											.lastElement()).getValeur().equals(
+											.getLast()).getValeur().equals(
 											"+") || ((Operateur) pileOperateur
-											.lastElement()).getValeur().equals(
+											.getLast()).getValeur().equals(
 											"-")) || ((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("("))
+									.getLast()).getValeur().equals("("))
 							|| (((Operateur) currentToken).getValeur().equals(
 									"(") && (((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("+") || ((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("-")))
+									.getLast()).getValeur().equals("+") || ((Operateur) pileOperateur
+									.getLast()).getValeur().equals("-")))
 							|| (((Operateur) currentToken).getValeur().equals(
 									"+") && (((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("(")))
+									.getLast()).getValeur().equals("(")))
 							|| (((Operateur) currentToken).getValeur().equals(
 									"-") && (((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("(")))) {
+									.getLast()).getValeur().equals("(")))) {
 						pileOperateur.add(currentToken);
 					} else {
 						fileSortie.add(pileOperateur.pop());
@@ -97,6 +101,6 @@ public class ReversePoloneseNotation {
 			fileSortie.add(pileOperateur.pop());
 		}
 		
-		return fileSortie;
 	}
+
 }
