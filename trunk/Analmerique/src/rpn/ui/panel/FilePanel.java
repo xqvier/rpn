@@ -15,6 +15,8 @@ import rpn.process.utils.MyQueue;
 
 public class FilePanel extends JPanel {
 
+	private boolean add = false;
+
 	private static final long serialVersionUID = 1L;
 
 	LinkedList<String> file = new LinkedList<String>();
@@ -25,12 +27,14 @@ public class FilePanel extends JPanel {
 			@Override
 			public void remove() {
 				file.remove();
+				add = false;
 				update();
 			}
 
 			@Override
 			public void add(String value) {
 				file.add(value);
+				add = true;
 				update();
 
 			}
@@ -38,6 +42,7 @@ public class FilePanel extends JPanel {
 			@Override
 			public void clear() {
 				file.clear();
+				add = false;
 				update();
 			}
 		});
@@ -51,10 +56,22 @@ public class FilePanel extends JPanel {
 		this.removeAll();
 		this.setLayout(new GridLayout(1, file.size()));
 		JTextField textField;
+		int i = 1; 
+		if(!add){
+			textField = new JTextField();
+			textField.setBackground(Color.RED);
+			this.add(textField);
+		}
+			
 		for (String value : file) {
+			
 			textField = new JTextField(value);
+			if(add && i == file.size()){
+				textField.setBackground(Color.GREEN);
+			}
 			textField.setHorizontalAlignment(JTextField.CENTER);
 			this.add(textField);
+			i++;
 		}
 		this.validate();
 

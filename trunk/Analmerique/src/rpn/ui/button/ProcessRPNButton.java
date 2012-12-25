@@ -10,7 +10,6 @@ import rpn.process.utils.Element;
 import rpn.process.utils.MyQueue;
 import rpn.process.utils.MyStack;
 
-
 public class ProcessRPNButton extends JButton implements MouseListener {
 
 	private static final long serialVersionUID = 1L;
@@ -18,9 +17,10 @@ public class ProcessRPNButton extends JButton implements MouseListener {
 	MyQueue<Element> fileSortie;
 	MyStack<Element> pileProcess;
 	MyStack<Element> pilePoubelle;
-	
-	
-	public ProcessRPNButton(MyQueue<Element> pFileEntree, MyQueue<Element> pFileSortie,MyStack<Element> pPileProcess,MyStack<Element> pPilePoubelle,  String pName) {
+
+	public ProcessRPNButton(MyQueue<Element> pFileEntree,
+			MyQueue<Element> pFileSortie, MyStack<Element> pPileProcess,
+			MyStack<Element> pPilePoubelle, String pName) {
 		super(pName);
 		fileEntree = pFileEntree;
 		fileSortie = pFileSortie;
@@ -31,14 +31,11 @@ public class ProcessRPNButton extends JButton implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		ReversePoloneseNotation rpn = new ReversePoloneseNotation(fileEntree,fileSortie,pileProcess,pilePoubelle);
-		try {
-			rpn.run();
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
+		ReversePoloneseNotation rpn = new ReversePoloneseNotation(fileEntree,
+				fileSortie, pileProcess, pilePoubelle);
+
+		rpn.start();
+
 	}
 
 	@Override

@@ -7,19 +7,14 @@ import rpn.process.utils.MyStack;
 import rpn.process.utils.Operande;
 import rpn.process.utils.Operateur;
 
+public class ReversePoloneseNotation extends Thread {
 
+	private MyQueue<Element> fileEntree;
+	private MyQueue<Element> fileSortie;
+	private MyStack<Element> pileOperateur;
+	private MyStack<Element> poubelle;
 
-public class ReversePoloneseNotation {
-
-	private  MyQueue<Element> fileEntree;
-	private  MyQueue<Element> fileSortie;
-	private  MyStack<Element> pileOperateur;
-	private  MyStack<Element> poubelle;
-
-
-	
-	
-public ReversePoloneseNotation(MyQueue<Element> fileEntree,
+	public ReversePoloneseNotation(MyQueue<Element> fileEntree,
 			MyQueue<Element> fileSortie, MyStack<Element> pileOperateur,
 			MyStack<Element> poubelle) {
 		this.fileEntree = fileEntree;
@@ -28,21 +23,15 @@ public ReversePoloneseNotation(MyQueue<Element> fileEntree,
 		this.poubelle = poubelle;
 	}
 
+	public void run() {
 
-
-
-
-	public void run() throws InterruptedException {
-		
 		fileSortie.clear();
 		pileOperateur.clear();
 		poubelle.clear();
-		
-		
+
 		Element currentToken;
 		Element currentOperator;
 		while (!fileEntree.isEmpty()) {
-			Thread.sleep(Params.WAIT_TIME);
 			currentToken = fileEntree.poll();
 			if (currentToken instanceof Operande) {
 				fileSortie.add(currentToken);
@@ -97,10 +86,10 @@ public ReversePoloneseNotation(MyQueue<Element> fileEntree,
 
 			}
 		}
-		while (! pileOperateur.isEmpty()){
+		while (!pileOperateur.isEmpty()) {
 			fileSortie.add(pileOperateur.pop());
 		}
-		
+
 	}
 
 }

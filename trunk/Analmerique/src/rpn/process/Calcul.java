@@ -1,25 +1,30 @@
 package rpn.process;
 
+import rpn.main.Params;
 import rpn.process.utils.Element;
+import rpn.process.utils.MyDouble;
 import rpn.process.utils.MyQueue;
 import rpn.process.utils.MyStack;
 import rpn.process.utils.Operande;
 import rpn.process.utils.Operateur;
 
 
-public class Calcul {
+public class Calcul extends Thread{
 
 	private MyStack<Element> processStack;
 	
 	private MyQueue<Element> fileSortie;
 
-	public Calcul(MyStack<Element> pPileProcess, MyQueue<Element> pFileSortie) {
+	private MyDouble resultat;
+	
+	public Calcul(MyStack<Element> pPileProcess, MyQueue<Element> pFileSortie, MyDouble pResultat) {
 		processStack = pPileProcess;
 		fileSortie = pFileSortie;
+		resultat = pResultat;
 	}
 	
 
-	public double run() {
+	public void run() {
 
 		Element currentElement;
 		while (!fileSortie.isEmpty()) {
@@ -57,7 +62,17 @@ public class Calcul {
 			}
 		}
 
-		return ((Operande) processStack.pop()).getValeur();
+		resultat.setValue(((Operande) processStack.pop()).getValeur());
+	}
+
+
+	public MyDouble getResultat() {
+		return resultat;
+	}
+
+
+	public void setResultat(MyDouble resultat) {
+		this.resultat = resultat;
 	}
 
 }

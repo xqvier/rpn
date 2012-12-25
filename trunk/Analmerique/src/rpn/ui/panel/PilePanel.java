@@ -17,6 +17,8 @@ import rpn.process.utils.MyStack;
 public class PilePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
+	private boolean add = false;
+	
 	private ArrayDeque<String> pile = new ArrayDeque<String>();
 
 	public PilePanel(String pName, MyStack<Element> pPile) {
@@ -25,12 +27,14 @@ public class PilePanel extends JPanel {
 			@Override
 			public void remove() {
 				pile.remove();
+				add = false;
 				update();
 			}
 
 			@Override
 			public void add(String value) {
 				pile.add(value);
+				add = true;
 				update();
 
 			}
@@ -38,6 +42,7 @@ public class PilePanel extends JPanel {
 			@Override
 			public void clear() {
 				pile.clear();
+				add = false;
 				update();
 			}
 		});
@@ -52,10 +57,20 @@ public class PilePanel extends JPanel {
 		this.setLayout(new GridLayout(pile.size(), 1));
 		JTextField textField;
 		Iterator<String> it = pile.descendingIterator();
+		int i = 1;
 		while (it.hasNext()) {
 			String el = it.next();
 			textField = new JTextField(el);
+			if(add && i == 1){
+				textField.setBackground(Color.GREEN);
+			}
 			textField.setHorizontalAlignment(JTextField.CENTER);
+			this.add(textField);
+			i++;
+		}
+		if(!add){
+			textField = new JTextField();
+			textField.setBackground(Color.RED);
 			this.add(textField);
 		}
 		this.validate();

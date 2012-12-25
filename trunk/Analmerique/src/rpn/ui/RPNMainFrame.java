@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import rpn.process.utils.Element;
+import rpn.process.utils.MyDouble;
 import rpn.process.utils.MyQueue;
 import rpn.process.utils.MyStack;
 import rpn.ui.panel.CommandPanel;
@@ -28,6 +29,7 @@ public class RPNMainFrame extends JFrame{
 		MyQueue<Element> fileSortie = new MyQueue<Element>();
 		MyStack<Element> pileProcess = new MyStack<Element>();
 		MyStack<Element> pilePoubelle = new MyStack<Element>();
+		MyDouble resultat = new MyDouble();
 		
 		
 		JPanel mainPanel = new JPanel();
@@ -57,7 +59,7 @@ public class RPNMainFrame extends JFrame{
 		mainPanel.add(poubellePilePanel, BorderLayout.EAST);
 		mainPanel.add(filesPanel, BorderLayout.SOUTH);
 		
-		JPanel commandPannel = new CommandPanel(fileEntree, fileSortie, pileProcess, pilePoubelle);
+		JPanel commandPannel = new CommandPanel(fileEntree, fileSortie, pileProcess, pilePoubelle, resultat);
 		
 		mainPanel.add(commandPannel, BorderLayout.CENTER);
 		
@@ -70,6 +72,7 @@ public class RPNMainFrame extends JFrame{
 		fileSortiePanel.setVisible(true);
 
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    this.setTitle("Reverse Polonese Notation");
 		
 		this.setContentPane(mainPanel);
 		

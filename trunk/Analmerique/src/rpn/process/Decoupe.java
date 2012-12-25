@@ -9,18 +9,20 @@ import rpn.process.utils.MyQueue;
 import rpn.process.utils.Operande;
 import rpn.process.utils.Operateur;
 
-public class Decoupe {
+public class Decoupe extends Thread{
 	
 
-	MyQueue<Element> equationTraitee;
+	private MyQueue<Element> equationTraitee;
 	
-	public Decoupe(MyQueue<Element> fileEntree){
+	private String equation; 
+	
+	public Decoupe(MyQueue<Element> fileEntree,String pEquation){
 		equationTraitee = fileEntree;
+		setEquation(pEquation);
 	}
 
-	public void run(String pEquation) throws InterruptedException {
+	public void run() {
 		String temp;
-		String equation = pEquation;
 		equationTraitee.clear();
 		Pattern pattern = Pattern.compile("[0-9]+|[-+*/]|[\\^()]");
 		Matcher matcher = pattern.matcher(equation);
@@ -42,7 +44,6 @@ public class Decoupe {
 				equationTraitee.add(new Operateur(temp));
 			}
 			
-			Thread.sleep(Params.WAIT_TIME);
 		}
 		
 	}
@@ -61,6 +62,14 @@ public class Decoupe {
 				return false;
 		}
 		return true;
+	}
+
+	public String getEquation() {
+		return equation;
+	}
+
+	public void setEquation(String equation) {
+		this.equation = equation;
 	}
 
 }
