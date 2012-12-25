@@ -16,30 +16,24 @@ public class DecoupeButton extends JButton implements MouseListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	private JTextField calculField;
-	
+
 	private MyQueue<Element> fileEntree;
-	
-	public DecoupeButton(MyQueue<Element> pFileEntree, JTextField pCalculField, String pName) {
+
+	public DecoupeButton(MyQueue<Element> pFileEntree, JTextField pCalculField,
+			String pName) {
 		super(pName);
 		fileEntree = pFileEntree;
 		calculField = pCalculField;
 		this.addMouseListener(this);
 	}
-	
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Decoupe decoupe = new Decoupe(fileEntree);
-				
-		try {
-			decoupe.run(calculField.getText());
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		Decoupe decoupe = new Decoupe(fileEntree, calculField.getText());
+
+		decoupe.start();
 
 	}
 

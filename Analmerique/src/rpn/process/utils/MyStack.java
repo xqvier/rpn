@@ -5,8 +5,9 @@ import java.util.ArrayList;
 
 import rpn.main.IObservableList;
 import rpn.main.IObservateurList;
+import rpn.main.Params;
 
-public class MyStack<T> extends ArrayDeque<T> implements IMyList,
+public class MyStack<T> extends ArrayDeque<T> implements
 		IObservableList {
 
 	private static final long serialVersionUID = 1L;
@@ -18,6 +19,11 @@ public class MyStack<T> extends ArrayDeque<T> implements IMyList,
 
 		boolean result = super.add(e);
 		updateObservateurAdd(((Element) e).getValeur().toString());
+		try {
+			Thread.sleep(Params.WAIT_TIME);
+		} catch (InterruptedException ex) {
+			ex.printStackTrace();
+		}
 		return result;
 	}
 	
@@ -25,12 +31,22 @@ public class MyStack<T> extends ArrayDeque<T> implements IMyList,
 	public void push(T e) {
 		super.push(e);
 		updateObservateurAdd(((Element) e).getValeur().toString());
+		try {
+			Thread.sleep(Params.WAIT_TIME);
+		} catch (InterruptedException ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	@Override
 	public synchronized T pop() {
 		T result = super.pop();
 		updateObservateurRemove();
+		try {
+			Thread.sleep(Params.WAIT_TIME);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 
@@ -38,6 +54,11 @@ public class MyStack<T> extends ArrayDeque<T> implements IMyList,
 	public void clear() {
 		super.clear();
 		updateObservateurClear();
+		try {
+			Thread.sleep(Params.WAIT_TIME);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

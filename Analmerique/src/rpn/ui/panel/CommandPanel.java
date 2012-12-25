@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 
 import rpn.main.Params;
 import rpn.process.utils.Element;
+import rpn.process.utils.MyDouble;
 import rpn.process.utils.MyQueue;
 import rpn.process.utils.MyStack;
 import rpn.ui.button.CalculButton;
@@ -17,6 +18,7 @@ import rpn.ui.button.DecoupeButton;
 import rpn.ui.button.MinusButton;
 import rpn.ui.button.PlusButton;
 import rpn.ui.button.ProcessRPNButton;
+import rpn.ui.field.MyResultatField;
 
 public class CommandPanel extends JPanel {
 
@@ -25,7 +27,7 @@ public class CommandPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public CommandPanel(MyQueue<Element> fileEntree, MyQueue<Element> fileSortie, MyStack<Element> pileProcess, MyStack<Element> pilePoubelle) {
+	public CommandPanel(MyQueue<Element> fileEntree, MyQueue<Element> fileSortie, MyStack<Element> pileProcess, MyStack<Element> pilePoubelle, MyDouble pResultat) {
 		this.setLayout(new BorderLayout());
 		
 		
@@ -65,7 +67,7 @@ public class CommandPanel extends JPanel {
 		this.add(inputPanel, BorderLayout.NORTH);
 		
 		
-		JTextField resultatField = new JTextField();
+		MyResultatField resultatField = new MyResultatField(pResultat);
 		resultatField.setHorizontalAlignment(JTextField.CENTER);
 		resultatField.setPreferredSize(new Dimension(500,50));
 		
@@ -79,7 +81,7 @@ public class CommandPanel extends JPanel {
 		JButton traitement = new ProcessRPNButton(fileEntree,fileSortie,pileProcess, pilePoubelle, "Traitement RPN");
 		centerPanel.add(traitement);
 		
-		JButton calcul = new CalculButton(fileSortie, pileProcess, resultatField, "Calcul");
+		JButton calcul = new CalculButton(fileSortie, pileProcess,pResultat, resultatField,  "Calcul");
 		centerPanel.add(calcul);
 		
 		
