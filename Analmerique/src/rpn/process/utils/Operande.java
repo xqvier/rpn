@@ -26,5 +26,9 @@ public class Operande extends Element {
 	public Double getValeur() {
 		return valeur;
 	}
+	
+	public String getString(){
+		return valeur.toString();
+	}
 
 }

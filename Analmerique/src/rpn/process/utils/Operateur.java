@@ -25,6 +25,10 @@ public class Operateur extends Element {
 	public String getValeur() {
 		return valeur;
 	}
+	
+	public String getString(){
+		return valeur;
+	}
 
 	
 }

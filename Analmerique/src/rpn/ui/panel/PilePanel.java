@@ -2,7 +2,6 @@ package rpn.ui.panel;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.util.ArrayDeque;
 import java.util.Iterator;
 
 import javax.swing.BorderFactory;
@@ -12,38 +11,23 @@ import javax.swing.border.Border;
 
 import rpn.main.IObservateurList;
 import rpn.process.utils.Element;
+import rpn.process.utils.IMyList;
 import rpn.process.utils.MyStack;
 
 public class PilePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	private boolean add = false;
-	
-	private ArrayDeque<String> pile = new ArrayDeque<String>();
+	private MyStack<Element> list;
 
 	public PilePanel(String pName, MyStack<Element> pPile) {
 		this.setName(pName);
 		pPile.addObservateur(new IObservateurList() {
+			
+			@SuppressWarnings("unchecked")
 			@Override
-			public void remove() {
-				pile.remove();
-				add = false;
-				update();
-			}
-
-			@Override
-			public void add(String value) {
-				pile.add(value);
-				add = true;
-				update();
-
-			}
-
-			@Override
-			public void clear() {
-				pile.clear();
-				add = false;
-				update();
+			public void update(IMyList pList) {
+				list = (MyStack<Element>) pList;
+				PilePanel.this.update();
 			}
 		});
 		Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
@@ -54,23 +38,13 @@ public class PilePanel extends JPanel {
 
 	public void update() {
 		this.removeAll();
-		this.setLayout(new GridLayout(pile.size(), 1));
+		this.setLayout(new GridLayout(list.size(), 1));
 		JTextField textField;
-		Iterator<String> it = pile.descendingIterator();
-		int i = 1;
+		Iterator<Element> it = list.descendingIterator();
 		while (it.hasNext()) {
-			String el = it.next();
-			textField = new JTextField(el);
-			if(add && i == 1){
-				textField.setBackground(Color.GREEN);
-			}
+			Element el = it.next();
+			textField = new JTextField(el.getString());
 			textField.setHorizontalAlignment(JTextField.CENTER);
-			this.add(textField);
-			i++;
-		}
-		if(!add){
-			textField = new JTextField();
-			textField.setBackground(Color.RED);
 			this.add(textField);
 		}
 		this.validate();

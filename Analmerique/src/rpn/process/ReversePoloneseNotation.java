@@ -1,6 +1,5 @@
 package rpn.process;
 
-import rpn.main.Params;
 import rpn.process.utils.Element;
 import rpn.process.utils.MyQueue;
 import rpn.process.utils.MyStack;

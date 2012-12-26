@@ -7,7 +7,7 @@ import rpn.main.IObservableList;
 import rpn.main.IObservateurList;
 import rpn.main.Params;
 
-public class MyStack<T> extends ArrayDeque<T> implements
+public class MyStack<T> extends ArrayDeque<T> implements IMyList,
 		IObservableList {
 
 	private static final long serialVersionUID = 1L;
@@ -18,7 +18,7 @@ public class MyStack<T> extends ArrayDeque<T> implements
 	public synchronized boolean add(T e) {
 
 		boolean result = super.add(e);
-		updateObservateurAdd(((Element) e).getValeur().toString());
+		updateObservateur(this);
 		try {
 			Thread.sleep(Params.WAIT_TIME);
 		} catch (InterruptedException ex) {
@@ -30,7 +30,7 @@ public class MyStack<T> extends ArrayDeque<T> implements
 	@Override
 	public void push(T e) {
 		super.push(e);
-		updateObservateurAdd(((Element) e).getValeur().toString());
+		updateObservateur(this);
 		try {
 			Thread.sleep(Params.WAIT_TIME);
 		} catch (InterruptedException ex) {
@@ -41,7 +41,7 @@ public class MyStack<T> extends ArrayDeque<T> implements
 	@Override
 	public synchronized T pop() {
 		T result = super.pop();
-		updateObservateurRemove();
+		updateObservateur(this);
 		try {
 			Thread.sleep(Params.WAIT_TIME);
 		} catch (InterruptedException e) {
@@ -53,7 +53,7 @@ public class MyStack<T> extends ArrayDeque<T> implements
 	@Override
 	public void clear() {
 		super.clear();
-		updateObservateurClear();
+		updateObservateur(this);
 		try {
 			Thread.sleep(Params.WAIT_TIME);
 		} catch (InterruptedException e) {
@@ -66,24 +66,11 @@ public class MyStack<T> extends ArrayDeque<T> implements
 		listObservateurs.add(obs);
 	}
 
-	@Override
-	public void updateObservateurAdd(String value) {
-		for (IObservateurList obs : listObservateurs) {
-			obs.add(value);
-		}
-	}
 
 	@Override
-	public void updateObservateurRemove() {
+	public void updateObservateur(IMyList list) {
 		for (IObservateurList obs : listObservateurs) {
-			obs.remove();
-		}
-	}
-
-	@Override
-	public void updateObservateurClear() {
-		for (IObservateurList obs : listObservateurs) {
-			obs.clear();
+			obs.update(list);
 		}
 	}
 

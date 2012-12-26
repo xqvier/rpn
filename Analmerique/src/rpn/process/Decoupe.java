@@ -3,7 +3,6 @@ package rpn.process;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import rpn.main.Params;
 import rpn.process.utils.Element;
 import rpn.process.utils.MyQueue;
 import rpn.process.utils.Operande;

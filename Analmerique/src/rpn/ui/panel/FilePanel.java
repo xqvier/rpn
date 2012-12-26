@@ -2,7 +2,6 @@ package rpn.ui.panel;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -11,39 +10,26 @@ import javax.swing.border.Border;
 
 import rpn.main.IObservateurList;
 import rpn.process.utils.Element;
+import rpn.process.utils.IMyList;
 import rpn.process.utils.MyQueue;
 
 public class FilePanel extends JPanel {
 
-	private boolean add = false;
 
 	private static final long serialVersionUID = 1L;
+	
+	private MyQueue<Element> list;
 
-	LinkedList<String> file = new LinkedList<String>();
 
 	public FilePanel(String pName, MyQueue<Element> pFile) {
 		this.setName(pName);
 		pFile.addObservateur(new IObservateurList() {
+			
+			@SuppressWarnings("unchecked")
 			@Override
-			public void remove() {
-				file.remove();
-				add = false;
-				update();
-			}
-
-			@Override
-			public void add(String value) {
-				file.add(value);
-				add = true;
-				update();
-
-			}
-
-			@Override
-			public void clear() {
-				file.clear();
-				add = false;
-				update();
+			public void update(IMyList pList) {
+				list = (MyQueue<Element>) pList;
+				FilePanel.this.update();
 			}
 		});
 		Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
@@ -54,24 +40,12 @@ public class FilePanel extends JPanel {
 
 	public void update() {
 		this.removeAll();
-		this.setLayout(new GridLayout(1, file.size()));
-		JTextField textField;
-		int i = 1; 
-		if(!add){
-			textField = new JTextField();
-			textField.setBackground(Color.RED);
-			this.add(textField);
-		}
-			
-		for (String value : file) {
-			
-			textField = new JTextField(value);
-			if(add && i == file.size()){
-				textField.setBackground(Color.GREEN);
-			}
+		this.setLayout(new GridLayout(1, list.size()));
+		JTextField textField;				
+		for (Element el : list) {			
+			textField = new JTextField(el.getString());
 			textField.setHorizontalAlignment(JTextField.CENTER);
 			this.add(textField);
-			i++;
 		}
 		this.validate();
 
