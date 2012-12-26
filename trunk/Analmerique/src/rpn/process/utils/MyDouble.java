@@ -2,41 +2,17 @@ package rpn.process.utils;
 
 import java.util.ArrayList;
 
-import rpn.main.IObservableList;
-import rpn.main.IObservateurList;
+import rpn.main.IObservableField;
+import rpn.main.IObservateurField;
 
-public class MyDouble extends Number implements IObservableList {
+public class MyDouble extends Number implements IObservableField {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private double value;
-	private ArrayList<IObservateurList> listIObservateur = new ArrayList<IObservateurList>();
-	
-	@Override
-	public void addObservateur(IObservateurList obs) {
-		listIObservateur.add(obs);
-	}
-
-	@Override
-	public void updateObservateurAdd(String value) {
-		for(IObservateurList obs : listIObservateur){
-			obs.add(value);
-		}
-	}
-
-	@Override
-	public void updateObservateurRemove() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void updateObservateurClear() {
-		// TODO Auto-generated method stub
-
-	}
+	private ArrayList<IObservateurField> listIObservateur = new ArrayList<IObservateurField>();
 
 	public double getValue() {
 		return value;
@@ -44,7 +20,7 @@ public class MyDouble extends Number implements IObservableList {
 
 	public void setValue(double value) {
 		this.value = value;
-		updateObservateurAdd(Double.toString(value));
+		updateObservateur(Double.toString(value));
 	}
 
 	@Override
@@ -70,10 +46,22 @@ public class MyDouble extends Number implements IObservableList {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	@Override
 	public String toString() {
 		return Double.toString(value);
+	}
+
+	@Override
+	public void updateObservateur(String value) {
+		for(IObservateurField obs : listIObservateur){
+			obs.update(value);
+		}
+	}
+
+	@Override
+	public void addObservateur(IObservateurField obs) {
+		listIObservateur.add(obs);
 	}
 
 }

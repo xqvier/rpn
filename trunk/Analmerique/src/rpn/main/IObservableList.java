@@ -1,8 +1,8 @@
 package rpn.main;
 
+import rpn.process.utils.IMyList;
+
 public interface IObservableList {
 	void addObservateur(IObservateurList obs);
-	void updateObservateurAdd(String value);
-	void updateObservateurRemove();
-	void updateObservateurClear();
+	void updateObservateur(IMyList list);
 }

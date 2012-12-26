@@ -7,7 +7,7 @@ import rpn.main.IObservableList;
 import rpn.main.IObservateurList;
 import rpn.main.Params;
 
-public class MyQueue<T> extends LinkedList<T> implements 
+public class MyQueue<T> extends LinkedList<T> implements IMyList, 
 		IObservableList {
 
 	
@@ -18,7 +18,7 @@ public class MyQueue<T> extends LinkedList<T> implements
 	@Override
 	public T poll() {
 		T result = super.poll();
-		updateObservateurRemove();
+		updateObservateur(this);
 		try {
 			Thread.sleep(Params.WAIT_TIME);
 		} catch (InterruptedException e) {
@@ -31,7 +31,7 @@ public class MyQueue<T> extends LinkedList<T> implements
 	@Override
 	public boolean add(T e) {
 		boolean result = super.add(e);
-		updateObservateurAdd(((Element) e).getValeur().toString());
+		updateObservateur(this);
 		try {
 			Thread.sleep(Params.WAIT_TIME);
 		} catch (InterruptedException ex) {
@@ -43,7 +43,7 @@ public class MyQueue<T> extends LinkedList<T> implements
 	@Override
 	public void clear() {
 		super.clear();
-		updateObservateurClear();
+		updateObservateur(this);
 		try {
 			Thread.sleep(Params.WAIT_TIME);
 		} catch (InterruptedException e) {
@@ -56,28 +56,12 @@ public class MyQueue<T> extends LinkedList<T> implements
 		this.listObservateurs.add(obs);
 	}
 
-	@Override
-	public void updateObservateurRemove() {
-		for (IObservateurList obs : listObservateurs) {
-			obs.remove();
-		}
-
-	}
 
 	@Override
-	public void updateObservateurAdd(String value) {
-		for (IObservateurList obs : listObservateurs) {
-			obs.add(value);
+	public void updateObservateur(IMyList list) {
+		for(IObservateurList obs : listObservateurs){
+			obs.update(list);
 		}
-
-	}
-
-	@Override
-	public void updateObservateurClear() {
-		for (IObservateurList obs : listObservateurs) {
-			obs.clear();
-		}
-		
 	}
 
 }
