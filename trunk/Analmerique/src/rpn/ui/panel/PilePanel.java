@@ -2,7 +2,6 @@ package rpn.ui.panel;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.util.Iterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -18,6 +17,9 @@ public class PilePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private MyStack<Element> list;
+	
+	private final int SIZE = 15;
+	
 
 	public PilePanel(String pName, MyStack<Element> pPile) {
 		this.setName(pName);
@@ -32,21 +34,27 @@ public class PilePanel extends JPanel {
 		});
 		Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
 		this.setBorder(blackLine);
+		this.setLayout(new GridLayout(SIZE, 1));
+		fill();
 		this.setVisible(true);
 		
+	}
+	private void fill(){
+		int i = list != null ? list.size() : 0;
+		for(; i < SIZE ; i++){
+			this.add(new JTextField());
+		}
 	}
 
 	public void update() {
 		this.removeAll();
-		this.setLayout(new GridLayout(list.size(), 1));
 		JTextField textField;
-		Iterator<Element> it = list.descendingIterator();
-		while (it.hasNext()) {
-			Element el = it.next();
-			textField = new JTextField(el.getString());
+		for(int j = list.size() -1 ; j>= 0 ; j--){
+			textField = new JTextField(list.get(j).getString());
 			textField.setHorizontalAlignment(JTextField.CENTER);
 			this.add(textField);
 		}
+		fill();
 		this.validate();
 	}
 

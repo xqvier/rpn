@@ -18,6 +18,8 @@ public class FilePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
+	private final int SIZE = 15;
+	
 	private MyQueue<Element> list;
 
 
@@ -34,19 +36,27 @@ public class FilePanel extends JPanel {
 		});
 		Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
 		this.setBorder(blackLine);
+		this.setLayout(new GridLayout(1, SIZE));
+		fill();
 		this.setVisible(true);
 
+	}
+	private void fill(){
+		int i = list != null ? list.size() : 0;
+		for(; i < SIZE ; i++){
+			this.add(new JTextField());
+		}
 	}
 
 	public void update() {
 		this.removeAll();
-		this.setLayout(new GridLayout(1, list.size()));
 		JTextField textField;				
 		for (Element el : list) {			
 			textField = new JTextField(el.getString());
 			textField.setHorizontalAlignment(JTextField.CENTER);
 			this.add(textField);
 		}
+		fill();
 		this.validate();
 
 	}
