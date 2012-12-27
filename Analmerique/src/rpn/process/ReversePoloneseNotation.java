@@ -51,31 +51,31 @@ public class ReversePoloneseNotation extends Thread {
 					if (pileOperateur.isEmpty()
 							|| (((Operateur) currentToken).getValeur().equals(
 									"*")
-									&& (((Operateur) pileOperateur.getLast()).getValeur().equals(
+									&& (((Operateur) pileOperateur.lastElement()).getValeur().equals(
 											"+") || ((Operateur) pileOperateur
-											.getLast()).getValeur().equals(
+											.lastElement()).getValeur().equals(
 											"-")) || ((Operateur) pileOperateur
-									.getLast()).getValeur().equals("("))
+									.lastElement()).getValeur().equals("("))
 							|| (((Operateur) currentToken).getValeur()
 									.equals("^"))
 							|| (((Operateur) currentToken).getValeur().equals(
 									"/")
 									&& (((Operateur) pileOperateur
-											.getLast()).getValeur().equals(
+											.lastElement()).getValeur().equals(
 											"+") || ((Operateur) pileOperateur
-											.getLast()).getValeur().equals(
+											.lastElement()).getValeur().equals(
 											"-")) || ((Operateur) pileOperateur
-									.getLast()).getValeur().equals("("))
+									.lastElement()).getValeur().equals("("))
 							|| (((Operateur) currentToken).getValeur().equals(
 									"(") && (((Operateur) pileOperateur
-									.getLast()).getValeur().equals("+") || ((Operateur) pileOperateur
-									.getLast()).getValeur().equals("-")))
+									.lastElement()).getValeur().equals("+") || ((Operateur) pileOperateur
+									.lastElement()).getValeur().equals("-")))
 							|| (((Operateur) currentToken).getValeur().equals(
 									"+") && (((Operateur) pileOperateur
-									.getLast()).getValeur().equals("(")))
+									.lastElement()).getValeur().equals("(")))
 							|| (((Operateur) currentToken).getValeur().equals(
 									"-") && (((Operateur) pileOperateur
-									.getLast()).getValeur().equals("(")))) {
+									.lastElement()).getValeur().equals("(")))) {
 						pileOperateur.add(currentToken);
 					} else {
 						fileSortie.add(pileOperateur.pop());

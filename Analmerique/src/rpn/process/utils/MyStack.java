@@ -1,13 +1,13 @@
 package rpn.process.utils;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Stack;
 
 import rpn.main.IObservableList;
 import rpn.main.IObservateurList;
 import rpn.main.Params;
 
-public class MyStack<T> extends ArrayDeque<T> implements IMyList,
+public class MyStack<T> extends Stack<T> implements IMyList,
 		IObservableList {
 
 	private static final long serialVersionUID = 1L;
@@ -28,14 +28,15 @@ public class MyStack<T> extends ArrayDeque<T> implements IMyList,
 	}
 	
 	@Override
-	public void push(T e) {
-		super.push(e);
+	public T push(T e) {
+		e = super.push(e);
 		updateObservateur(this);
 		try {
 			Thread.sleep(Params.WAIT_TIME);
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}
+		return e;
 	}
 
 	@Override

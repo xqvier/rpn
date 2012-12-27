@@ -3,7 +3,6 @@ package rpn.ui.field;
 import javax.swing.JTextField;
 
 import rpn.main.IObservateurField;
-import rpn.main.IObservateurList;
 import rpn.process.utils.MyDouble;
 
 public class MyResultatField extends JTextField {
