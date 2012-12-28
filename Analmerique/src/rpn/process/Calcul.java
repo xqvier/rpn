@@ -57,6 +57,21 @@ public class Calcul extends Thread{
 					op2 = (Operande) processStack.pop();
 					op1 = (Operande) processStack.pop();
 					processStack.push(new Operande(Math.pow(op1.getValeur(), op2.getValeur())));
+				}else if (((Operateur) currentElement).getValeur().equals("sin")){
+					op1 = (Operande) processStack.pop();
+					processStack.push(new Operande(Math.sin(op1.getValeur())));
+				}else if (((Operateur) currentElement).getValeur().equals("cos")){
+					op1 = (Operande) processStack.pop();
+					processStack.push(new Operande(Math.cos(op1.getValeur())));
+				}else if (((Operateur) currentElement).getValeur().equals("log")){
+					op1 = (Operande) processStack.pop();
+					processStack.push(new Operande(Math.log(op1.getValeur())));
+				}else if (((Operateur) currentElement).getValeur().equals("ln")){
+					op1 = (Operande) processStack.pop();
+					processStack.push(new Operande(Math.log10(op1.getValeur())));
+				}else if (((Operateur) currentElement).getValeur().equals("e")){
+					op1 = (Operande) processStack.pop();
+					processStack.push(new Operande(Math.exp(op1.getValeur())));
 				}
 			}
 		}

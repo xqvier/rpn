@@ -23,7 +23,7 @@ public class Decoupe extends Thread{
 	public void run() {
 		String temp;
 		equationTraitee.clear();
-		Pattern pattern = Pattern.compile("[0-9]+|[-+*/]|[\\^()]");
+		Pattern pattern = Pattern.compile("[0-9]+|[-+*/]|[\\^()]|sin|cos|e|log|ln");
 		Matcher matcher = pattern.matcher(equation);
 		/*
 		 * Tant que l'on trouve des "morceaux" de notre équation, on instancie
