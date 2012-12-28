@@ -49,33 +49,7 @@ public class ReversePoloneseNotation extends Thread {
 				} else {
 
 					if (pileOperateur.isEmpty()
-							|| (((Operateur) currentToken).getValeur().equals(
-									"*")
-									&& (((Operateur) pileOperateur.lastElement()).getValeur().equals(
-											"+") || ((Operateur) pileOperateur
-											.lastElement()).getValeur().equals(
-											"-")) || ((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("("))
-							|| (((Operateur) currentToken).getValeur()
-									.equals("^"))
-							|| (((Operateur) currentToken).getValeur().equals(
-									"/")
-									&& (((Operateur) pileOperateur
-											.lastElement()).getValeur().equals(
-											"+") || ((Operateur) pileOperateur
-											.lastElement()).getValeur().equals(
-											"-")) || ((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("("))
-							|| (((Operateur) currentToken).getValeur().equals(
-									"(") && (((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("+") || ((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("-")))
-							|| (((Operateur) currentToken).getValeur().equals(
-									"+") && (((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("(")))
-							|| (((Operateur) currentToken).getValeur().equals(
-									"-") && (((Operateur) pileOperateur
-									.lastElement()).getValeur().equals("(")))) {
+							|| ((Operateur) currentToken).isPrioritaire((Operateur) pileOperateur.lastElement())) {
 						pileOperateur.add(currentToken);
 					} else {
 						fileSortie.add(pileOperateur.pop());
