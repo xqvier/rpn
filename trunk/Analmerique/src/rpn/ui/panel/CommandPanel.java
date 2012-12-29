@@ -18,6 +18,8 @@ import rpn.ui.button.DecoupeButton;
 import rpn.ui.button.MinusButton;
 import rpn.ui.button.PlusButton;
 import rpn.ui.button.ProcessRPNButton;
+import rpn.ui.button.StepByStepActivateButton;
+import rpn.ui.button.StepByStepNextButton;
 import rpn.ui.field.MyResultatField;
 
 public class CommandPanel extends JPanel {
@@ -58,6 +60,9 @@ public class CommandPanel extends JPanel {
 		
 		
 		
+		
+		
+		
 		JTextField calculField = new JTextField();
 		calculField.setHorizontalAlignment(JTextField.CENTER);
 		calculField.setPreferredSize(new Dimension(500,50));
@@ -86,6 +91,23 @@ public class CommandPanel extends JPanel {
 		
 		
 		this.add(centerPanel, BorderLayout.CENTER);
+		
+		
+		
+		// stepBystepPanel
+		JPanel stepByStepPanel = new JPanel();
+		stepByStepPanel.setPreferredSize(new Dimension(500,50));
+		stepByStepPanel.setLayout(new GridLayout(1, 2));
+		
+		JButton activateStepByStep = new StepByStepActivateButton();
+		stepByStepPanel.add(activateStepByStep);
+		
+		JButton nextStepByStep = new StepByStepNextButton();
+		stepByStepPanel.add(nextStepByStep);
+		
+		this.add(stepByStepPanel, BorderLayout.SOUTH);
+		
+		
 		
 		
 		

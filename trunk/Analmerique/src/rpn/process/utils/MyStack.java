@@ -20,7 +20,11 @@ public class MyStack<T> extends Stack<T> implements IMyList,
 		boolean result = super.add(e);
 		updateObservateur(this);
 		try {
-			Thread.sleep(Params.WAIT_TIME);
+			if (Params.STEP_BY_STEP) {
+				wait();
+			} else {
+				Thread.sleep(Params.WAIT_TIME);
+			}
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}
@@ -32,7 +36,11 @@ public class MyStack<T> extends Stack<T> implements IMyList,
 		e = super.push(e);
 		updateObservateur(this);
 		try {
-			Thread.sleep(Params.WAIT_TIME);
+			if (Params.STEP_BY_STEP) {
+				wait();
+			} else {
+				Thread.sleep(Params.WAIT_TIME);
+			}
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}
@@ -44,7 +52,11 @@ public class MyStack<T> extends Stack<T> implements IMyList,
 		T result = super.pop();
 		updateObservateur(this);
 		try {
-			Thread.sleep(Params.WAIT_TIME);
+			if (Params.STEP_BY_STEP) {
+				wait();
+			} else {
+				Thread.sleep(Params.WAIT_TIME);
+			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -56,7 +68,11 @@ public class MyStack<T> extends Stack<T> implements IMyList,
 		super.clear();
 		updateObservateur(this);
 		try {
-			Thread.sleep(Params.WAIT_TIME);
+			if (Params.STEP_BY_STEP) {
+				wait();
+			} else {
+				Thread.sleep(Params.WAIT_TIME);
+			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
