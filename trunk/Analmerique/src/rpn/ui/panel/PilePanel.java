@@ -1,6 +1,7 @@
 package rpn.ui.panel;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
@@ -51,6 +52,7 @@ public class PilePanel extends JPanel {
 		JTextField textField;
 		for(int j = list.size() -1 ; j>= 0 ; j--){
 			textField = new JTextField(list.get(j).getString());
+			textField.setFont(new Font(null, 0, 25));
 			textField.setHorizontalAlignment(JTextField.CENTER);
 			this.add(textField);
 		}
