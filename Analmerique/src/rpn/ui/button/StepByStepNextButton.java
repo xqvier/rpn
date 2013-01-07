@@ -5,6 +5,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 
+import rpn.main.Params;
+
 public class StepByStepNextButton extends JButton implements MouseListener {
 
 	/**
@@ -19,7 +21,7 @@ public class StepByStepNextButton extends JButton implements MouseListener {
 	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		notifyAll();
+		Params.WAIT = false;
 	}
 
 	@Override
