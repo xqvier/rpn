@@ -20,7 +20,7 @@ public class MyQueue<T> extends LinkedList<T> implements IMyList,
 		updateObservateur(this);
 		try {
 			if (Params.STEP_BY_STEP) {
-				wait();
+				myWait();
 			} else {
 				Thread.sleep(Params.WAIT_TIME);
 			}
@@ -37,7 +37,7 @@ public class MyQueue<T> extends LinkedList<T> implements IMyList,
 		updateObservateur(this);
 		try {
 			if (Params.STEP_BY_STEP) {
-				wait();
+				myWait();
 			} else {
 				Thread.sleep(Params.WAIT_TIME);
 			}
@@ -54,7 +54,7 @@ public class MyQueue<T> extends LinkedList<T> implements IMyList,
 		try {
 			synchronized (this) {
 				if (Params.STEP_BY_STEP) {
-					wait();
+					myWait();
 				} else {
 					Thread.sleep(Params.WAIT_TIME);
 				}
@@ -76,4 +76,10 @@ public class MyQueue<T> extends LinkedList<T> implements IMyList,
 		}
 	}
 
+	private void myWait(){
+		Params.WAIT = true;
+		while(Params.WAIT);
+		
+	}
+	
 }

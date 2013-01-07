@@ -31,16 +31,34 @@ public class Decoupe extends Thread{
 		 * stocké dans une file, c'est sur cette file que l'on va appliquer
 		 * l'algorithme de transformation en notation polonaise inversée
 		 */
+		boolean lastWasOperateur = false;
+		boolean negative = false;
 		while (matcher.find())
 		{
+			
 			temp = matcher.group(0);
 			//System.out.println(temp);
 			// TODO yea yea, go tester les nombre negatif ( a partir de la fin si - rencontré suivit d'un - c'est que 
 			// c'est un nombre negatif
+			
 			if (Decoupe.isNumber(temp)) {
-				equationTraitee.add(new Operande(Double.valueOf(temp)));
+				if(negative){
+					equationTraitee.add(new Operande(Double.valueOf(temp)*-1));
+					negative = false;
+				} else 
+				{
+					equationTraitee.add(new Operande(Double.valueOf(temp)));
+				}
+				
+				lastWasOperateur = false;
 			} else {
-				equationTraitee.add(new Operateur(temp));
+				lastWasOperateur = true;
+				if(lastWasOperateur && "-".equals(temp)){
+					negative = true;
+				} else {
+					negative = false;
+					equationTraitee.add(new Operateur(temp));
+				}
 			}
 			
 		}

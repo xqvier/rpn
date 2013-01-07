@@ -78,7 +78,7 @@ public class CommandPanel extends JPanel {
 		
 		this.add(resultatField, BorderLayout.SOUTH);
 		JPanel centerPanel = new JPanel();
-		centerPanel.setLayout(new GridLayout(1, 3));
+		centerPanel.setLayout(new GridLayout(2, 3));
 		
 		JButton decoupe = new DecoupeButton(fileEntree, calculField, "Découpe");
 		centerPanel.add(decoupe);
@@ -105,7 +105,7 @@ public class CommandPanel extends JPanel {
 		JButton nextStepByStep = new StepByStepNextButton();
 		stepByStepPanel.add(nextStepByStep);
 		
-		this.add(stepByStepPanel, BorderLayout.SOUTH);
+		centerPanel.add(stepByStepPanel);
 		
 		
 		

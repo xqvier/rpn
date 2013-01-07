@@ -21,7 +21,7 @@ public class MyStack<T> extends Stack<T> implements IMyList,
 		updateObservateur(this);
 		try {
 			if (Params.STEP_BY_STEP) {
-				wait();
+				myWait();
 			} else {
 				Thread.sleep(Params.WAIT_TIME);
 			}
@@ -37,7 +37,7 @@ public class MyStack<T> extends Stack<T> implements IMyList,
 		updateObservateur(this);
 		try {
 			if (Params.STEP_BY_STEP) {
-				wait();
+				myWait();
 			} else {
 				Thread.sleep(Params.WAIT_TIME);
 			}
@@ -53,7 +53,7 @@ public class MyStack<T> extends Stack<T> implements IMyList,
 		updateObservateur(this);
 		try {
 			if (Params.STEP_BY_STEP) {
-				wait();
+				myWait();
 			} else {
 				Thread.sleep(Params.WAIT_TIME);
 			}
@@ -69,7 +69,7 @@ public class MyStack<T> extends Stack<T> implements IMyList,
 		updateObservateur(this);
 		try {
 			if (Params.STEP_BY_STEP) {
-				wait();
+				myWait();
 			} else {
 				Thread.sleep(Params.WAIT_TIME);
 			}
@@ -91,4 +91,8 @@ public class MyStack<T> extends Stack<T> implements IMyList,
 		}
 	}
 
+	private void myWait(){
+		Params.WAIT = true;
+		while(Params.WAIT);
+	}
 }
