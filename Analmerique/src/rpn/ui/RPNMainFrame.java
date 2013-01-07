@@ -45,8 +45,8 @@ public class RPNMainFrame extends JFrame{
 		JPanel filesPanel = new JPanel();
 		filesPanel.setPreferredSize(new Dimension(600, 100));
 		mainPanel.add(filesPanel, BorderLayout.SOUTH);
-		processPilePanel.setPreferredSize(new Dimension(50,500));
-		poubellePilePanel.setPreferredSize(new Dimension(50,500));
+		processPilePanel.setPreferredSize(new Dimension(75,500));
+		poubellePilePanel.setPreferredSize(new Dimension(75,500));
 		
 		
 		
