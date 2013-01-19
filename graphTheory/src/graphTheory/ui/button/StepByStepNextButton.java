@@ -1,5 +1,8 @@
 package graphTheory.ui.button;
 
+
+import graphTheory.process.param.Params;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -14,35 +17,34 @@ public class StepByStepNextButton extends JButton implements MouseListener {
 
 	public StepByStepNextButton() {
 		super("Next");
-		this.addMouseListener(this);
+		addMouseListener(this);
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(MouseEvent arg0) {
+		Params.WAIT = false;
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
+	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}

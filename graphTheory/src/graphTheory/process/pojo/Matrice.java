@@ -58,24 +58,6 @@ public class Matrice implements IObservableMatrice {
 		updateObservateur();
 	}
 
-	public boolean isThatLineFullOfZero(int line) {
-		for (ArrayList<MatriceCase> column : caseList) {
-			if (column.get(line).isEnabled() && column.get(line).getValue() == 1) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	public boolean isThatColumnFullOfZero(int column) {
-		for(MatriceCase casee : caseList.get(column)) {
-			if(casee.isEnabled() && casee.getValue() == 1){
-				return false;
-			}
-		}
-		return true;
-	}
-	
 	public int getSize(){
 		return caseList.size();
 	}
@@ -90,9 +72,29 @@ public class Matrice implements IObservableMatrice {
 		return size;
 	}
 	
+	public boolean isThatLineFullOfZero(int line) {
+		for(MatriceCase casee : caseList.get(line)) {
+			if(casee.isEnabled() && casee.getValue() == 1){
+				return false;
+			}
+		}
+		return true;
+	}
+
+
+	public boolean isThatColumnFullOfZero(int column) {		
+		for (ArrayList<MatriceCase> line : caseList) {
+			if (line.get(column).isEnabled() && line.get(column).getValue() == 1) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+
 	public boolean isThatLineDisabled(int line){
-		for (ArrayList<MatriceCase> column : caseList) {
-			if (column.get(line).isEnabled()) {
+		for(MatriceCase casee : caseList.get(line)) {
+			if(casee.isEnabled()){
 				return false;
 			}
 		}
@@ -100,8 +102,8 @@ public class Matrice implements IObservableMatrice {
 	}
 	
 	public boolean isThatColumnDisabled(int column){
-		for(MatriceCase casee : caseList.get(column)) {
-			if(casee.isEnabled()){
+		for (ArrayList<MatriceCase> line : caseList) {
+			if (line.get(column).isEnabled()) {
 				return false;
 			}
 		}

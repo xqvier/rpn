@@ -1,6 +1,7 @@
 package graphTheory.process.service;
 
 import graphTheory.process.param.Params;
+import graphTheory.process.pojo.Levels;
 import graphTheory.process.pojo.Matrice;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class MatriceService extends Thread{
 	}
 
 
-	public static void calculateLevel(Matrice matrice, ArrayList<Integer> niveaux){
+	public static void calculateLevel(Matrice matrice, Levels niveaux){
 		Integer level = 0;
 		ArrayList<Integer> columnForThisLevel = null ;
 		while(matrice.getEnabledSize()> 0){

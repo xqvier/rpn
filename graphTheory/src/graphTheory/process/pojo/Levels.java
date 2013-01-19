@@ -36,5 +36,12 @@ public class Levels extends ArrayList<Integer> implements IObservableLevels{
 	public int size() {
 		return size;
 	}
+	
+	@Override
+	public Integer set(int index, Integer element) {
+		element = super.set(index, element);
+		updateObservateur();
+		return element;
+	}
 
 }
