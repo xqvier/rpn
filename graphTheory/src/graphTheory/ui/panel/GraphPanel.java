@@ -11,9 +11,12 @@ import graphTheory.process.pojo.MatriceCase;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Paint;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+
+import org.apache.commons.collections15.Transformer;
 
 public class GraphPanel extends JPanel {
 	static final long serialVersionUID = 1L;
@@ -52,6 +55,21 @@ public class GraphPanel extends JPanel {
 				layout);
 		vv.setPreferredSize(new Dimension(350, 350));		
 		vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller<String>());
+		
+		
+		if(levels!=null){
+			Transformer<String,Paint> vertexPaint = new Transformer<String, Paint>() {
+
+						@Override
+						public Paint transform(String arg0) {
+							return COLORS[levels.get(arg0.charAt(0) - 'A')];
+						}
+			}; 
+	        vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);
+		}
+		
+		
+		
 		this.add(vv);
 		this.validate();
 	}
