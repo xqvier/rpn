@@ -2,7 +2,8 @@ package graphTheory.ui.panel;
 
 import graphTheory.process.pojo.Levels;
 import graphTheory.process.pojo.Matrice;
-import graphTheory.process.service.MatriceService;
+import graphTheory.process.service.MatriceServiceCircuit;
+import graphTheory.process.service.MatriceServiceLevel;
 import graphTheory.ui.MainFrame;
 import graphTheory.ui.button.CalculButton;
 import graphTheory.ui.button.MatriceExempleButton;
@@ -141,11 +142,9 @@ public class LeftPanel extends JPanel {
 		}
 
 		calculButton.setEnabled(true);
-		if (MatriceService.isThereAnyCircuit(matrice)) {
-			mainFrame.sendErrorMessage(Message.MATRICE_CONTIENT_CIRCUIT);
-			calculButton.setEnabled(false);
-		}
-
+		MatriceServiceCircuit matriceServiceCircuit = new MatriceServiceCircuit(matrice, mainFrame);
+		matriceServiceCircuit.start();
+		
 		mainFrame.setMatrice(matrice);
 		niveauPanel.setLevels(new Levels(0));
 
@@ -155,10 +154,13 @@ public class LeftPanel extends JPanel {
 		Levels levels = new Levels(mainFrame.getMatrice().getSize());
 		niveauPanel.setLevels(levels);
 		mainFrame.drawLevels(levels);
-		MatriceService matriceService = new MatriceService();
-		matriceService.start();
-		MatriceService.calculateLevel(mainFrame.getMatrice(), levels);
+		MatriceServiceLevel matriceServiceLevel = new MatriceServiceLevel(mainFrame.getMatrice(), levels);
+		matriceServiceLevel.start();
 		System.out.println(levels);
 
+	}
+
+	public void disableCalculButton() {
+		calculButton.setEnabled(false);
 	}
 }
