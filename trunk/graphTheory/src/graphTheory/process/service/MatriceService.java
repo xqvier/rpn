@@ -43,7 +43,6 @@ public class MatriceService extends Thread{
 			try {
 				Thread.sleep(Params.WAIT_TIME);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
