@@ -98,6 +98,7 @@ public class LeftPanel extends JPanel {
 		}
 		mainFrame.setMatrice(new Matrice(nombreSommet));
 		matricePanel.setMatrice(mainFrame.getMatrice());
+		niveauPanel.setLevels(new Levels(0));
 	}
 
 	public void createMatrice(int n) {
@@ -120,13 +121,13 @@ public class LeftPanel extends JPanel {
 			matrice.getCaseList().get(1).get(3).setValue(1);
 			matrice.getCaseList().get(2).get(1).setValue(1);
 			matrice.getCaseList().get(2).get(3).setValue(1);
-			matrice.getCaseList().get(3).get(0).setValue(1);
 			matrice.getCaseList().get(3).get(4).setValue(1);
-			matrice.getCaseList().get(4).get(0).setValue(1);
 			break;
 		}
 		mainFrame.setMatrice(matrice);
 		matricePanel.setMatrice(matrice);
+		niveauPanel.setLevels(new Levels(0));
+		calculButton.setEnabled(false);
 	}
 
 	public void updateMatrice() {
@@ -146,12 +147,15 @@ public class LeftPanel extends JPanel {
 		}
 
 		mainFrame.setMatrice(matrice);
+		niveauPanel.setLevels(new Levels(0));
 
 	}
 
 	public void calculLevels() {
 		Levels levels = new Levels(mainFrame.getMatrice().getSize());
 		niveauPanel.setLevels(levels);
+		MatriceService matriceService = new MatriceService();
+		matriceService.start();
 		MatriceService.calculateLevel(mainFrame.getMatrice(), levels);
 		System.out.println(levels);
 

@@ -1,9 +1,13 @@
 package graphTheory.ui.button;
 
+import graphTheory.process.param.Params;
+
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+
 
 public class StepByStepActivateButton extends JButton implements MouseListener {
 
@@ -13,36 +17,51 @@ public class StepByStepActivateButton extends JButton implements MouseListener {
 	private static final long serialVersionUID = 1L;
 
 	public StepByStepActivateButton() {
-		super("Activer le mode pas à pas");
-		this.addMouseListener(this);
+		if(Params.STEP_BY_STEP){
+			setText("Désactiver le mode pas à pas");
+			setBackground(Color.GREEN);
+		}else {
+			setText("Activer le mode pas à pas");
+			setBackground(Color.RED);
+		}
+		addMouseListener(this);
 	}
 	
+	
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(MouseEvent arg0) {
+		if(Params.STEP_BY_STEP){
+			setText("Activer le mode pas à pas");			
+			setBackground(Color.RED);
+			Params.STEP_BY_STEP = false;
+		} else {
+			setText("Désactiver le mode pas à pas");
+			setBackground(Color.GREEN);
+			Params.STEP_BY_STEP = true;
+		}
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
+	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
