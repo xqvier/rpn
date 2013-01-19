@@ -154,6 +154,7 @@ public class LeftPanel extends JPanel {
 	public void calculLevels() {
 		Levels levels = new Levels(mainFrame.getMatrice().getSize());
 		niveauPanel.setLevels(levels);
+		mainFrame.drawLevels(levels);
 		MatriceService matriceService = new MatriceService();
 		matriceService.start();
 		MatriceService.calculateLevel(mainFrame.getMatrice(), levels);

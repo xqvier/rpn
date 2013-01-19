@@ -1,5 +1,6 @@
 package graphTheory.ui;
 
+import graphTheory.process.pojo.Levels;
 import graphTheory.process.pojo.Matrice;
 import graphTheory.ui.panel.GraphPanel;
 import graphTheory.ui.panel.LeftPanel;
@@ -67,6 +68,11 @@ public class MainFrame extends JFrame {
 
 	public void setLevels(ArrayList<Integer> levels) {
 		this.levels = levels;
+	}
+
+	public void drawLevels(Levels levels) {
+		graphPanelFinal.drawGraphByLevel(matrice, levels);
+		
 	}
 	
 }
