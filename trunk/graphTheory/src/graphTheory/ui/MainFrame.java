@@ -4,6 +4,7 @@ import graphTheory.process.pojo.Levels;
 import graphTheory.process.pojo.Matrice;
 import graphTheory.ui.panel.GraphPanel;
 import graphTheory.ui.panel.LeftPanel;
+import graphTheory.ui.param.Message;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -22,7 +23,7 @@ public class MainFrame extends JFrame {
 	
 	private ArrayList<Integer> levels = null;
 
-	JPanel leftPanel = new LeftPanel(this);
+	LeftPanel leftPanel = new LeftPanel(this);
 	GraphPanel graphPanelOrigine = new GraphPanel();
 	GraphPanel graphPanelFinal = new GraphPanel();
 
@@ -73,6 +74,11 @@ public class MainFrame extends JFrame {
 	public void drawLevels(Levels levels) {
 		graphPanelFinal.drawGraphByLevel(matrice, levels);
 		
+	}
+
+	public void thereIsCircuit() {
+		leftPanel.disableCalculButton();
+		sendErrorMessage(Message.MATRICE_CONTIENT_CIRCUIT);		
 	}
 	
 }

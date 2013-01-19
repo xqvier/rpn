@@ -42,8 +42,9 @@ public class Matrice implements IObservableMatrice {
 	}
 
 	public void disableLine(int line) {
-		for (ArrayList<MatriceCase> column : caseList) {
-			column.get(line).setEnabled(false);
+
+		for (MatriceCase casee : caseList.get(line)) {
+			casee.setEnabled(false);
 		}
 
 		updateObservateur();
@@ -51,8 +52,8 @@ public class Matrice implements IObservableMatrice {
 	}
 
 	public void disableColumn(int column) {
-		for (MatriceCase casee : caseList.get(column)) {
-			casee.setEnabled(false);
+		for (ArrayList<MatriceCase> line : caseList) {
+			line.get(column).setEnabled(false);
 		}
 
 		updateObservateur();
