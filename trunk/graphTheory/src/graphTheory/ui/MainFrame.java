@@ -1,27 +1,72 @@
 package graphTheory.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-
+import graphTheory.process.pojo.Matrice;
 import graphTheory.ui.panel.GraphPanel;
+import graphTheory.ui.panel.LeftPanel;
+
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	
+	private Matrice matrice = null;
+	
+	private ArrayList<Integer> levels = null;
+
+	JPanel leftPanel = new LeftPanel(this);
+	GraphPanel graphPanelOrigine = new GraphPanel();
+	GraphPanel graphPanelFinal = new GraphPanel();
 
 	public MainFrame() {
 		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BorderLayout());
-		this.setSize(new Dimension(800, 600));
-		this.add(mainPanel);
+	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    this.setTitle("Calcul des niveaux d'un graphe");
+		mainPanel.setLayout(new GridLayout(1, 3));
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int xSize = ((int) tk.getScreenSize().getWidth());  
+		int ySize = ((int) tk.getScreenSize().getHeight());
+		this.setSize(new Dimension(xSize, ySize));
+		this.setContentPane(mainPanel);
+
 		
-		JPanel graphPanel = new GraphPanel();
-		graphPanel.setBackground(Color.green);
-		mainPanel.add(graphPanel, BorderLayout.CENTER);
+		
+		mainPanel.add(leftPanel);
+		mainPanel.add(graphPanelOrigine);
+		mainPanel.add(graphPanelFinal);
+		
+		
 		
 	}
+
+	public Matrice getMatrice() {
+		return matrice;
+	}
+
+	public void setMatrice(Matrice matrice) {
+		this.matrice = matrice;
+		graphPanelOrigine.drawGraph(matrice);
+		
+	}
+	
+	public void sendErrorMessage(String message){
+		JOptionPane.showMessageDialog(this,
+			    message);
+	}
+
+	public ArrayList<Integer> getLevels() {
+		return levels;
+	}
+
+	public void setLevels(ArrayList<Integer> levels) {
+		this.levels = levels;
+	}
+	
 }
