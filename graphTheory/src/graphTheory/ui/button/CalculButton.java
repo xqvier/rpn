@@ -19,7 +19,6 @@ public class CalculButton extends JButton implements MouseListener {
 	public CalculButton(LeftPanel pLeftPanel) {
 		super("Calculer les niveaux");
 		leftPanel = pLeftPanel;
-		this.setEnabled(false);
 		this.addMouseListener(this);
 	}
 	

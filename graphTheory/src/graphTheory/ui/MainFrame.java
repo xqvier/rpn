@@ -7,6 +7,7 @@ import graphTheory.ui.panel.LeftPanel;
 import graphTheory.ui.param.Message;
 
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -18,9 +19,9 @@ import javax.swing.JPanel;
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Matrice matrice = null;
-	
+
 	private ArrayList<Integer> levels = null;
 
 	LeftPanel leftPanel = new LeftPanel(this);
@@ -29,28 +30,22 @@ public class MainFrame extends JFrame {
 
 	public MainFrame() {
 		JPanel mainPanel = new JPanel();
-	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    this.setTitle("Calcul des niveaux d'un graphe");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("Calcul des niveaux d'un graphe");
 		mainPanel.setLayout(new GridLayout(1, 2));
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		int xSize = ((int) tk.getScreenSize().getWidth());  
-		int ySize = ((int) tk.getScreenSize().getHeight());
-		this.setSize(new Dimension(xSize, ySize));
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setContentPane(mainPanel);
 
-			
 		mainPanel.add(leftPanel);
-		
+
 		JPanel rightPanel = new JPanel();
-		rightPanel.setLayout(new GridLayout(2,1));
-		
+		rightPanel.setLayout(new GridLayout(2, 1));
+
 		rightPanel.add(graphPanelOrigine);
 		rightPanel.add(graphPanelFinal);
 
 		mainPanel.add(rightPanel);
-		
-		
-		
+
 	}
 
 	public Matrice getMatrice() {
@@ -60,12 +55,11 @@ public class MainFrame extends JFrame {
 	public void setMatrice(Matrice matrice) {
 		this.matrice = matrice;
 		graphPanelOrigine.drawGraph(matrice);
-		
+
 	}
-	
-	public void sendErrorMessage(String message){
-		JOptionPane.showMessageDialog(this,
-			    message);
+
+	public void sendErrorMessage(String message) {
+		JOptionPane.showMessageDialog(this, message);
 	}
 
 	public ArrayList<Integer> getLevels() {
@@ -78,12 +72,12 @@ public class MainFrame extends JFrame {
 
 	public void drawLevels(Levels levels) {
 		graphPanelFinal.drawGraphByLevel(matrice, levels);
-		
+
 	}
 
 	public void thereIsCircuit() {
 		leftPanel.disableCalculButton();
-		sendErrorMessage(Message.MATRICE_CONTIENT_CIRCUIT);		
+		sendErrorMessage(Message.MATRICE_CONTIENT_CIRCUIT);
 	}
-	
+
 }

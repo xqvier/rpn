@@ -1,6 +1,6 @@
 package graphTheory.ui.button;
 
-import graphTheory.ui.panel.LeftPanel;
+import graphTheory.ui.panel.MatriceExemplePanel;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -15,18 +15,18 @@ public class NombreSommetValidateButton extends JButton implements
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private LeftPanel leftPanel;
+	private MatriceExemplePanel matriceExemplePanel;
 	
-	public NombreSommetValidateButton(LeftPanel pLeftPanel) {		
+	public NombreSommetValidateButton(MatriceExemplePanel pMatriceExemplePanel) {		
 		super("Valider");
-		leftPanel = pLeftPanel;
+		matriceExemplePanel = pMatriceExemplePanel;
 		this.addMouseListener(this);
 	}
 	
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		leftPanel.createMatrice();
+		matriceExemplePanel.createMatrice();
 	}
 
 	@Override
