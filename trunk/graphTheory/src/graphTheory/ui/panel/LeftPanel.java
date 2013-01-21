@@ -6,17 +6,19 @@ import graphTheory.process.service.MatriceServiceCircuit;
 import graphTheory.process.service.MatriceServiceLevel;
 import graphTheory.ui.MainFrame;
 import graphTheory.ui.button.CalculButton;
-import graphTheory.ui.button.MatriceExempleButton;
 import graphTheory.ui.button.MatriceValidateButton;
-import graphTheory.ui.button.NombreSommetValidateButton;
 import graphTheory.ui.button.StepByStepActivateButton;
 import graphTheory.ui.button.StepByStepNextButton;
 import graphTheory.ui.param.Message;
+import graphTheory.ui.param.Params;
 
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
 public class LeftPanel extends JPanel {
@@ -28,63 +30,57 @@ public class LeftPanel extends JPanel {
 
 	private JPanel nombreSommetPanel = new JPanel();
 	private JTextField nombreSommetField = new JTextField();
-	private NombreSommetValidateButton nombreSommetValidateButton = new NombreSommetValidateButton(
+	private MatriceExemplePanel matriceExemplePanel = new MatriceExemplePanel(
 			this);
-	private JPanel matriceExemplePanel = new JPanel();
-	private MatriceExempleButton matriceExempleButton3 = new MatriceExempleButton(
-			this, 3);
-	private MatriceExempleButton matriceExempleButton4 = new MatriceExempleButton(
-			this, 4);
-	private MatriceExempleButton matriceExempleButton5 = new MatriceExempleButton(
-			this, 5);
-
 	private MatricePanel matricePanel = new MatricePanel();
 	private NiveauPanel niveauPanel = new NiveauPanel();
-	private MatriceValidateButton matriceValidateButton = new MatriceValidateButton(
-			this);
 	private CalculButton calculButton = new CalculButton(this);
 	private JPanel stepByStepPanel = new JPanel();
 	private StepByStepActivateButton stepByStepActivateButton = new StepByStepActivateButton();
 	private StepByStepNextButton stepByStepNextButton = new StepByStepNextButton();
+	private CalculBar calculBar = new CalculBar();
 
 	public LeftPanel(MainFrame pMainFrame) {
 		mainFrame = pMainFrame;
-		this.setLayout(new GridLayout(7, 1));
+		this.setLayout(new BorderLayout());
 
 		// NOMBRE SOMMET
 		nombreSommetPanel.setLayout(new GridLayout(1, 2));
-		JPanel nombreSommetFieldPanel = new JPanel();
-		nombreSommetFieldPanel.setLayout(new FlowLayout());
-		nombreSommetPanel.add(nombreSommetFieldPanel);
-		nombreSommetPanel.add(nombreSommetValidateButton);
 		nombreSommetField.setHorizontalAlignment(JTextField.CENTER);
+		nombreSommetField.setPreferredSize(new Dimension(
+				Params.CASE_SOMMET_WIDTH, Params.CASE_SOMMET_HEIGHT));
+		JPanel nombreSommetFieldPanel = new JPanel();
+		nombreSommetFieldPanel.setLayout(new GridBagLayout());
 		nombreSommetFieldPanel.add(nombreSommetField);
-		this.add(nombreSommetPanel);
+		nombreSommetPanel.add(nombreSommetFieldPanel);
+		this.add(nombreSommetPanel, BorderLayout.NORTH);
 
 		// MATRICE EXEMPLE
-		matriceExemplePanel.setLayout(new GridLayout(1, 3));
-		matriceExemplePanel.add(matriceExempleButton3);
-		matriceExemplePanel.add(matriceExempleButton4);
-		matriceExemplePanel.add(matriceExempleButton5);
-		this.add(matriceExemplePanel);
-		
+		nombreSommetPanel.add(matriceExemplePanel);
+
 		// MATRICE
-		this.add(matricePanel);
+		JPanel centerPanel = new JPanel();
+		centerPanel.setLayout(new BorderLayout());
+
+		centerPanel.add(matricePanel, BorderLayout.CENTER);
 
 		// NIVEAUX
-		this.add(niveauPanel);
-
-		// VALIDER MATRICE
-		this.add(matriceValidateButton);
+		niveauPanel.setPreferredSize(new Dimension(200, 50));
+		centerPanel.add(niveauPanel, BorderLayout.SOUTH);
+		this.add(centerPanel, BorderLayout.CENTER);
 
 		// CALCUL
-		this.add(calculButton);
+		stepByStepPanel.add(calculButton);
 
 		// STEP BY STEP
-		stepByStepPanel.setLayout(new GridLayout(1, 2));
-		stepByStepPanel.add(stepByStepActivateButton);
-		stepByStepPanel.add(stepByStepNextButton);
-		this.add(stepByStepPanel);
+		stepByStepPanel.setLayout(new BorderLayout());
+		stepByStepPanel.add(calculBar, BorderLayout.NORTH);
+
+		stepByStepPanel.add(calculButton, BorderLayout.CENTER);
+
+		stepByStepPanel.add(stepByStepActivateButton, BorderLayout.SOUTH);
+		stepByStepPanel.add(stepByStepNextButton, BorderLayout.SOUTH);
+		this.add(stepByStepPanel, BorderLayout.SOUTH);
 
 	}
 
@@ -103,36 +99,42 @@ public class LeftPanel extends JPanel {
 		}
 		mainFrame.setMatrice(new Matrice(nombreSommet));
 		matricePanel.setMatrice(mainFrame.getMatrice());
+		calculBar.setMatrice(mainFrame.getMatrice());
 		niveauPanel.setLevels(new Levels(0));
 	}
 
 	public void createMatrice(int n) {
 		Matrice matrice = new Matrice(n);
 
-		switch (n) {
-		case 3:
-			matrice.getCaseList().get(0).get(1).setValue(1);
-			matrice.getCaseList().get(1).get(2).setValue(1);
-			break;
-		case 4:
-			matrice.getCaseList().get(0).get(1).setValue(1);
-			matrice.getCaseList().get(0).get(2).setValue(1);
-			matrice.getCaseList().get(1).get(3).setValue(1);
-			matrice.getCaseList().get(2).get(1).setValue(1);
-			matrice.getCaseList().get(2).get(3).setValue(1);
-			break;
-		case 5:
-			matrice.getCaseList().get(1).get(0).setValue(1);
-			matrice.getCaseList().get(1).get(3).setValue(1);
-			matrice.getCaseList().get(2).get(1).setValue(1);
-			matrice.getCaseList().get(2).get(3).setValue(1);
-			matrice.getCaseList().get(3).get(4).setValue(1);
-			break;
+		if (!nombreSommetField.getText().equals("")) {
+			createMatrice();
+		} else {
+			switch (n) {
+			case 3:
+				matrice.getCaseList().get(0).get(1).setValue(1);
+				matrice.getCaseList().get(1).get(2).setValue(1);
+				break;
+			case 4:
+				matrice.getCaseList().get(0).get(1).setValue(1);
+				matrice.getCaseList().get(0).get(2).setValue(1);
+				matrice.getCaseList().get(1).get(3).setValue(1);
+				matrice.getCaseList().get(2).get(1).setValue(1);
+				matrice.getCaseList().get(2).get(3).setValue(1);
+				break;
+			case 5:
+				matrice.getCaseList().get(1).get(0).setValue(1);
+				matrice.getCaseList().get(1).get(3).setValue(1);
+				matrice.getCaseList().get(2).get(1).setValue(1);
+				matrice.getCaseList().get(2).get(3).setValue(1);
+				matrice.getCaseList().get(3).get(4).setValue(1);
+				break;
+			}
+			mainFrame.setMatrice(matrice);
+			matricePanel.setMatrice(matrice);
+			calculBar.setMatrice(matrice);
+
+			niveauPanel.setLevels(new Levels(0));
 		}
-		mainFrame.setMatrice(matrice);
-		matricePanel.setMatrice(matrice);
-		niveauPanel.setLevels(new Levels(0));
-		calculButton.setEnabled(false);
 	}
 
 	public void updateMatrice() {
@@ -145,10 +147,11 @@ public class LeftPanel extends JPanel {
 
 		}
 
-		calculButton.setEnabled(true);
-		MatriceServiceCircuit matriceServiceCircuit = new MatriceServiceCircuit(matrice, mainFrame);
+		MatriceServiceCircuit matriceServiceCircuit = new MatriceServiceCircuit(
+				matrice, mainFrame);
 		matriceServiceCircuit.start();
-		
+
+		calculBar.setMatrice(mainFrame.getMatrice());
 		mainFrame.setMatrice(matrice);
 		niveauPanel.setLevels(new Levels(0));
 
@@ -158,13 +161,13 @@ public class LeftPanel extends JPanel {
 		Levels levels = new Levels(mainFrame.getMatrice().getSize());
 		niveauPanel.setLevels(levels);
 		mainFrame.drawLevels(levels);
-		MatriceServiceLevel matriceServiceLevel = new MatriceServiceLevel(mainFrame.getMatrice(), levels);
+		MatriceServiceLevel matriceServiceLevel = new MatriceServiceLevel(
+				mainFrame.getMatrice(), levels);
 		matriceServiceLevel.start();
 		System.out.println(levels);
 
 	}
 
 	public void disableCalculButton() {
-		calculButton.setEnabled(false);
 	}
 }
