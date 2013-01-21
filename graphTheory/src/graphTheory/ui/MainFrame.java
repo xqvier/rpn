@@ -31,18 +31,23 @@ public class MainFrame extends JFrame {
 		JPanel mainPanel = new JPanel();
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setTitle("Calcul des niveaux d'un graphe");
-		mainPanel.setLayout(new GridLayout(1, 3));
+		mainPanel.setLayout(new GridLayout(1, 2));
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		int xSize = ((int) tk.getScreenSize().getWidth());  
 		int ySize = ((int) tk.getScreenSize().getHeight());
 		this.setSize(new Dimension(xSize, ySize));
 		this.setContentPane(mainPanel);
 
-		
-		
+			
 		mainPanel.add(leftPanel);
-		mainPanel.add(graphPanelOrigine);
-		mainPanel.add(graphPanelFinal);
+		
+		JPanel rightPanel = new JPanel();
+		rightPanel.setLayout(new GridLayout(2,1));
+		
+		rightPanel.add(graphPanelOrigine);
+		rightPanel.add(graphPanelFinal);
+
+		mainPanel.add(rightPanel);
 		
 		
 		
