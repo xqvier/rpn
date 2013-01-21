@@ -13,6 +13,7 @@ import graphTheory.ui.button.StepByStepActivateButton;
 import graphTheory.ui.button.StepByStepNextButton;
 import graphTheory.ui.param.Message;
 
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
@@ -52,9 +53,12 @@ public class LeftPanel extends JPanel {
 
 		// NOMBRE SOMMET
 		nombreSommetPanel.setLayout(new GridLayout(1, 2));
-		nombreSommetField.setHorizontalAlignment(JTextField.CENTER);
-		nombreSommetPanel.add(nombreSommetField);
+		JPanel nombreSommetFieldPanel = new JPanel();
+		nombreSommetFieldPanel.setLayout(new FlowLayout());
+		nombreSommetPanel.add(nombreSommetFieldPanel);
 		nombreSommetPanel.add(nombreSommetValidateButton);
+		nombreSommetField.setHorizontalAlignment(JTextField.CENTER);
+		nombreSommetFieldPanel.add(nombreSommetField);
 		this.add(nombreSommetPanel);
 
 		// MATRICE EXEMPLE

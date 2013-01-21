@@ -52,7 +52,6 @@ public class MatricePanel extends JPanel {
 		this.setLayout(new GridLayout(matrice.getSize() + 1,
 				matrice.getSize() + 1));
 		this.removeAll();
-		JTextField textField;
 		JTextField textArea;
 		Character letter = 'A';
 		textArea = new JTextField();

@@ -60,10 +60,10 @@ public class GraphPanel extends JPanel {
 		if(levels!=null){
 			Transformer<String,Paint> vertexPaint = new Transformer<String, Paint>() {
 
-						@Override
-						public Paint transform(String arg0) {
-							return COLORS[levels.get(arg0.charAt(0) - 'A')];
-						}
+				@Override
+				public Paint transform(String arg0) {
+					return COLORS[levels.get(arg0.charAt(0) - 'A')];
+				}
 			}; 
 	        vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);
 		}
