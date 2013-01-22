@@ -6,7 +6,6 @@ import graphTheory.process.service.MatriceServiceCircuit;
 import graphTheory.process.service.MatriceServiceLevel;
 import graphTheory.ui.MainFrame;
 import graphTheory.ui.button.CalculButton;
-import graphTheory.ui.button.MatriceValidateButton;
 import graphTheory.ui.button.StepByStepActivateButton;
 import graphTheory.ui.button.StepByStepNextButton;
 import graphTheory.ui.param.Message;
@@ -18,7 +17,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
 public class LeftPanel extends JPanel {
@@ -43,7 +41,7 @@ public class LeftPanel extends JPanel {
 	public LeftPanel(MainFrame pMainFrame) {
 		mainFrame = pMainFrame;
 		this.setLayout(new BorderLayout());
-
+		this.setPreferredSize(new Dimension(mainFrame.getSize().width*40/100, mainFrame.getSize().height));
 		// NOMBRE SOMMET
 		nombreSommetPanel.setLayout(new GridLayout(1, 2));
 		nombreSommetField.setHorizontalAlignment(JTextField.CENTER);
@@ -70,17 +68,18 @@ public class LeftPanel extends JPanel {
 		this.add(centerPanel, BorderLayout.CENTER);
 
 		// CALCUL
-		stepByStepPanel.add(calculButton);
+		JPanel bottomLeftPanel = new JPanel();
+		bottomLeftPanel.setLayout(new BorderLayout());
 
 		// STEP BY STEP
-		stepByStepPanel.setLayout(new BorderLayout());
-		stepByStepPanel.add(calculBar, BorderLayout.NORTH);
+		stepByStepPanel.setLayout(new GridLayout(1,2));
+		bottomLeftPanel.add(calculBar, BorderLayout.NORTH);
 
-		stepByStepPanel.add(calculButton, BorderLayout.CENTER);
-
-		stepByStepPanel.add(stepByStepActivateButton, BorderLayout.SOUTH);
-		stepByStepPanel.add(stepByStepNextButton, BorderLayout.SOUTH);
-		this.add(stepByStepPanel, BorderLayout.SOUTH);
+		bottomLeftPanel.add(calculButton, BorderLayout.CENTER);
+		bottomLeftPanel.add(stepByStepPanel, BorderLayout.SOUTH);
+		stepByStepPanel.add(stepByStepActivateButton);
+		stepByStepPanel.add(stepByStepNextButton);
+		this.add(bottomLeftPanel, BorderLayout.SOUTH);
 
 	}
 
@@ -100,7 +99,7 @@ public class LeftPanel extends JPanel {
 		mainFrame.setMatrice(new Matrice(nombreSommet));
 		matricePanel.setMatrice(mainFrame.getMatrice());
 		calculBar.setMatrice(mainFrame.getMatrice());
-		niveauPanel.setLevels(new Levels(0));
+		niveauPanel.setLevels(new Levels(nombreSommet));
 	}
 
 	public void createMatrice(int n) {
@@ -133,7 +132,7 @@ public class LeftPanel extends JPanel {
 			matricePanel.setMatrice(matrice);
 			calculBar.setMatrice(matrice);
 
-			niveauPanel.setLevels(new Levels(0));
+			niveauPanel.setLevels(new Levels(n));
 		}
 	}
 
@@ -153,7 +152,7 @@ public class LeftPanel extends JPanel {
 
 		calculBar.setMatrice(mainFrame.getMatrice());
 		mainFrame.setMatrice(matrice);
-		niveauPanel.setLevels(new Levels(0));
+		niveauPanel.setLevels(new Levels(matrice.getSize()));
 
 	}
 

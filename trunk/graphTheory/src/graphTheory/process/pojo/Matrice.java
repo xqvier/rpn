@@ -66,7 +66,7 @@ public class Matrice implements IObservableMatrice {
 	public int getEnabledSize(){
 		int size = 0;
 		for(int i = 0 ; i < getSize(); i++){
-			if(!isThatLineDisabled(i)){
+			if(!isThatColumnDisabled(i)){
 				size++;
 			}
 		}

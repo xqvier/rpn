@@ -18,7 +18,7 @@ public class NombreSommetValidateButton extends JButton implements
 	private MatriceExemplePanel matriceExemplePanel;
 	
 	public NombreSommetValidateButton(MatriceExemplePanel pMatriceExemplePanel) {		
-		super("Valider");
+		super("Dessiner matrice");
 		matriceExemplePanel = pMatriceExemplePanel;
 		this.addMouseListener(this);
 	}
