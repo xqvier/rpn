@@ -41,7 +41,7 @@ public class NiveauPanel extends JPanel {
 		this.setPreferredSize(new Dimension((levels.size() + 1)
 				* Params.SIZE_CASE_MATRICE, Params.SIZE_CASE_MATRICE));
 		this.setLayout(new GridLayout(1, levels.size() + 1));
-		JTextField textArea = new JTextField();
+		JTextField textArea = new JTextField("LVL");
 		textArea.setHorizontalAlignment(JTextField.CENTER);
 		textArea.setFont(new Font(null, 0, 25));
 		textArea.setEditable(false);

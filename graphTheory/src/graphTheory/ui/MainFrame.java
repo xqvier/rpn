@@ -6,10 +6,9 @@ import graphTheory.ui.panel.GraphPanel;
 import graphTheory.ui.panel.LeftPanel;
 import graphTheory.ui.param.Message;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -24,27 +23,32 @@ public class MainFrame extends JFrame {
 
 	private ArrayList<Integer> levels = null;
 
-	LeftPanel leftPanel = new LeftPanel(this);
-	GraphPanel graphPanelOrigine = new GraphPanel();
-	GraphPanel graphPanelFinal = new GraphPanel();
+	private LeftPanel leftPanel;
+	private GraphPanel graphPanelOrigine = new GraphPanel();
+	private GraphPanel graphPanelFinal = new GraphPanel();
 
 	public MainFrame() {
+		this.setVisible(true);
 		JPanel mainPanel = new JPanel();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Calcul des niveaux d'un graphe");
-		mainPanel.setLayout(new GridLayout(1, 2));
+		mainPanel.setLayout(new BorderLayout());
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setContentPane(mainPanel);
-
-		mainPanel.add(leftPanel);
+		
+		leftPanel = new LeftPanel(this);
+		mainPanel.add(leftPanel, BorderLayout.WEST);
 
 		JPanel rightPanel = new JPanel();
 		rightPanel.setLayout(new GridLayout(2, 1));
 
+		rightPanel.setPreferredSize(new Dimension(getSize().width * 60 / 100,
+				getSize().height));
+
 		rightPanel.add(graphPanelOrigine);
 		rightPanel.add(graphPanelFinal);
 
-		mainPanel.add(rightPanel);
+		mainPanel.add(rightPanel, BorderLayout.CENTER);
 
 	}
 

@@ -1,12 +1,14 @@
 package graphTheory.ui.panel;
 
-import java.awt.GridLayout;
-
 import graphTheory.ui.button.NombreSommetValidateButton;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.SpringLayout;
 
 public class MatriceExemplePanel extends JPanel {
 
@@ -22,18 +24,26 @@ public class MatriceExemplePanel extends JPanel {
 
 	public MatriceExemplePanel(LeftPanel pLeftPanel) {
 		leftPanel = pLeftPanel;
-		this.setLayout(new GridLayout(4, 1));
-
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
 		// radio box!
-
-		this.add(matrice3);
-		this.add(matrice4);
-		this.add(matrice5);
+		ButtonGroup buttonGroup = new ButtonGroup();
+		
+		buttonGroup.add(matrice3);
+		buttonGroup.add(matrice4);
+		buttonGroup.add(matrice5);
+		gbc.gridy = 0;		
+		this.add(matrice3, gbc);
+		gbc.gridy = 1;		
+		this.add(matrice4, gbc);
+		gbc.gridy = 2;		
+		this.add(matrice5, gbc);
 
 		// bouton valider
 		NombreSommetValidateButton nombreSommetValidateButton = new NombreSommetValidateButton(
 				this);
-		this.add(nombreSommetValidateButton);
+		gbc.gridy = 3;		
+		this.add(nombreSommetValidateButton, gbc);
 
 	}
 
@@ -44,6 +54,8 @@ public class MatriceExemplePanel extends JPanel {
 			leftPanel.createMatrice(4);
 		} else if (matrice5.isSelected()) {
 			leftPanel.createMatrice(5);
+		}else {
+			leftPanel.createMatrice();
 		}
 	}
 

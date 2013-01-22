@@ -15,7 +15,7 @@ public class Levels extends ArrayList<Integer> implements IObservableLevels{
 	public Levels(int pSize) {
 		size = pSize;
 		for(int i = 0 ; i < size; i++){
-			this.add(Integer.valueOf(i));
+			this.add(0);
 		}
 	}
 
