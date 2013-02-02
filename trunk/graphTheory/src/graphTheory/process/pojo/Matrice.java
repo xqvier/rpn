@@ -132,4 +132,10 @@ public class Matrice implements IObservableMatrice {
 		
 	}
 
+
+	@Override
+	public void deleteObservateur(IObservateurMatrice obs) {
+		listObservateurs.remove(obs);
+	}
+
 }

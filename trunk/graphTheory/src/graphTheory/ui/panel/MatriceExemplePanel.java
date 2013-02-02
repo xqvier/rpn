@@ -4,7 +4,6 @@ import graphTheory.ui.button.NombreSommetValidateButton;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;

@@ -35,9 +35,10 @@ public void run() {
 
 		if (matrice.getEnabledSize() != 0) {
 			matrice.enableMatrice();
-			mainFrame.thereIsCircuit();
+			mainFrame.thereIsCircuit(true);
 		}
 		matrice.enableMatrice();
+		mainFrame.thereIsCircuit(false);
 	}
 
 	private static void myWait() {

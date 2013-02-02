@@ -6,6 +6,7 @@ import graphTheory.process.service.MatriceServiceCircuit;
 import graphTheory.process.service.MatriceServiceLevel;
 import graphTheory.ui.MainFrame;
 import graphTheory.ui.button.CalculButton;
+import graphTheory.ui.button.MatriceValidateButton;
 import graphTheory.ui.button.StepByStepActivateButton;
 import graphTheory.ui.button.StepByStepNextButton;
 import graphTheory.ui.param.Message;
@@ -37,6 +38,8 @@ public class LeftPanel extends JPanel {
 	private StepByStepActivateButton stepByStepActivateButton = new StepByStepActivateButton();
 	private StepByStepNextButton stepByStepNextButton = new StepByStepNextButton();
 	private CalculBar calculBar = new CalculBar();
+	private MatriceValidateButton matriceValidateButton = new MatriceValidateButton(this);
+	
 
 	public LeftPanel(MainFrame pMainFrame) {
 		mainFrame = pMainFrame;
@@ -59,7 +62,9 @@ public class LeftPanel extends JPanel {
 		// MATRICE
 		JPanel centerPanel = new JPanel();
 		centerPanel.setLayout(new BorderLayout());
-
+		
+		centerPanel.add(matriceValidateButton, BorderLayout.NORTH);
+		
 		centerPanel.add(matricePanel, BorderLayout.CENTER);
 
 		// NIVEAUX
@@ -75,6 +80,7 @@ public class LeftPanel extends JPanel {
 		stepByStepPanel.setLayout(new GridLayout(1,2));
 		bottomLeftPanel.add(calculBar, BorderLayout.NORTH);
 
+		calculButton.setEnabled(false);
 		bottomLeftPanel.add(calculButton, BorderLayout.CENTER);
 		bottomLeftPanel.add(stepByStepPanel, BorderLayout.SOUTH);
 		stepByStepPanel.add(stepByStepActivateButton);
@@ -168,5 +174,10 @@ public class LeftPanel extends JPanel {
 	}
 
 	public void disableCalculButton() {
+		calculButton.setEnabled(false);
+	}
+
+	public void enableCalculButton() {
+		calculButton.setEnabled(true);		
 	}
 }

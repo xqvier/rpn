@@ -27,20 +27,26 @@ public class GraphPanel extends JPanel {
 
 	private static final Color[] COLORS = { Color.RED, Color.BLUE, Color.GREEN,
 			Color.PINK, Color.ORANGE, Color.YELLOW };
+	
+	private IObservateurMatrice observateurMatrice;
 
 	public GraphPanel() {
 
 	}
 
 	public void drawGraph(Matrice pMatrice) {
-		matrice = pMatrice;
-		matrice.addObservateur(new IObservateurMatrice() {
-
+		if(matrice != null){
+			matrice.deleteObservateur(observateurMatrice);
+		}
+		observateurMatrice = new IObservateurMatrice() {
+			
 			@Override
 			public void update(Matrice matrice) {
-				myDraw();
+				myDraw();				
 			}
-		});
+		};
+		matrice = pMatrice;
+		matrice.addObservateur(observateurMatrice);
 		myDraw();
 	}
 
