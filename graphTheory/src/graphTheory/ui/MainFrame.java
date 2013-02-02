@@ -79,9 +79,13 @@ public class MainFrame extends JFrame {
 
 	}
 
-	public void thereIsCircuit() {
-		leftPanel.disableCalculButton();
+	public void thereIsCircuit(boolean isThere) {
+		if(isThere){
+		leftPanel.disableCalculButton();		
 		sendErrorMessage(Message.MATRICE_CONTIENT_CIRCUIT);
+		} else {
+			leftPanel.enableCalculButton();
+		}
 	}
 
 }
