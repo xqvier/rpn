@@ -8,8 +8,8 @@ import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import graphTheory.process.pojo.Matrice;
 import graphTheory.process.pojo.MatriceCase;
+import graphTheory.ui.param.Params;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Paint;
 import java.util.ArrayList;
@@ -25,9 +25,6 @@ public class GraphPanel extends JPanel {
 
 	private ArrayList<Integer> levels;
 
-	private static final Color[] COLORS = { Color.RED, Color.BLUE, Color.GREEN,
-			Color.PINK, Color.ORANGE, Color.YELLOW };
-	
 	private IObservateurMatrice observateurMatrice;
 
 	public GraphPanel() {
@@ -68,7 +65,7 @@ public class GraphPanel extends JPanel {
 
 				@Override
 				public Paint transform(String arg0) {
-					return COLORS[levels.get(arg0.charAt(0) - 'A')];
+					return Params.COLORS[levels.get(arg0.charAt(0) - 'A')];
 				}
 			}; 
 	        vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);

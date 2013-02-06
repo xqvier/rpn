@@ -48,6 +48,7 @@ public class NiveauPanel extends JPanel {
 		this.add(textArea);
 		for (int i = 0; i< levels.size() ; i++) {
 			textArea = new JTextField(Integer.toString(levels.get(i)));
+			textArea.setBackground(Params.COLORS[levels.get(i)]);
 			textArea.setHorizontalAlignment(JTextField.CENTER);
 			textArea.setFont(new Font(null, 0, 25));
 			textArea.setEditable(false);
