@@ -7,8 +7,6 @@ import graphTheory.process.service.MatriceServiceLevel;
 import graphTheory.ui.MainFrame;
 import graphTheory.ui.button.CalculButton;
 import graphTheory.ui.button.MatriceValidateButton;
-import graphTheory.ui.button.StepByStepActivateButton;
-import graphTheory.ui.button.StepByStepNextButton;
 import graphTheory.ui.param.Message;
 import graphTheory.ui.param.Params;
 
@@ -34,9 +32,9 @@ public class LeftPanel extends JPanel {
 	private MatricePanel matricePanel = new MatricePanel();
 	private NiveauPanel niveauPanel = new NiveauPanel();
 	private CalculButton calculButton = new CalculButton(this);
-	private JPanel stepByStepPanel = new JPanel();
-	private StepByStepActivateButton stepByStepActivateButton = new StepByStepActivateButton();
-	private StepByStepNextButton stepByStepNextButton = new StepByStepNextButton();
+//	private JPanel stepByStepPanel = new JPanel();
+//	private StepByStepActivateButton stepByStepActivateButton = new StepByStepActivateButton();
+//	private StepByStepNextButton stepByStepNextButton = new StepByStepNextButton();
 	private CalculBar calculBar = new CalculBar();
 	private MatriceValidateButton matriceValidateButton = new MatriceValidateButton(this);
 	
@@ -77,14 +75,15 @@ public class LeftPanel extends JPanel {
 		bottomLeftPanel.setLayout(new BorderLayout());
 
 		// STEP BY STEP
-		stepByStepPanel.setLayout(new GridLayout(1,2));
-		bottomLeftPanel.add(calculBar, BorderLayout.NORTH);
+//		stepByStepPanel.setLayout(new GridLayout(1,2));
+		bottomLeftPanel.add(matriceValidateButton, BorderLayout.NORTH);
+		bottomLeftPanel.add(calculBar, BorderLayout.CENTER);
 
 		calculButton.setEnabled(false);
-		bottomLeftPanel.add(calculButton, BorderLayout.CENTER);
-		bottomLeftPanel.add(stepByStepPanel, BorderLayout.SOUTH);
-		stepByStepPanel.add(stepByStepActivateButton);
-		stepByStepPanel.add(stepByStepNextButton);
+		bottomLeftPanel.add(calculButton, BorderLayout.SOUTH);
+//		bottomLeftPanel.add(stepByStepPanel, BorderLayout.SOUTH);
+//		stepByStepPanel.add(stepByStepActivateButton);
+//		stepByStepPanel.add(stepByStepNextButton);
 		this.add(bottomLeftPanel, BorderLayout.SOUTH);
 
 	}
