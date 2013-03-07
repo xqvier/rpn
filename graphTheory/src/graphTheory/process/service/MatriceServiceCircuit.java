@@ -41,12 +41,11 @@ public void run() {
 		mainFrame.thereIsCircuit(false);
 	}
 
-	private static void myWait() {
+	private void myWait() {
 
 		if (Params.STEP_BY_STEP) {
 			Params.WAIT = true;
-			while (Params.WAIT)
-				;
+			while (Params.WAIT)	;
 		} else {
 			try {
 				Thread.sleep(Params.WAIT_TIME);
